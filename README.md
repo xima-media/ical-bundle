@@ -1,7 +1,6 @@
 iCal Bundle
 ===========
 
-Wraps the `eluceo/ical` package:
+Wraps the [eluceo/ical](https://github.com/markuspoerschke/iCal) package to a Symfony bundle:
 - maps doctrine associations
 - registers Sonata Admins for Event and RecurringRule
-- adds support of *DateInterval* in Doctrine DBAL and ORM through the `herrera-io/doctrine-dateinterval` package
