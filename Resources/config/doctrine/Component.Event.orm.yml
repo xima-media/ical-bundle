@@ -1,0 +1,81 @@
+Xima\ICalBundle\Entity\Component\Event:
+  type: mappedSuperclass
+  id:
+    id:
+      column: id
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    uniqueId:
+      column: unique_id
+      type: integer
+    dtStart:
+      column: dt_start
+      type: datetime
+      nullable: true
+    dtEnd:
+      column: dt_end
+      type: datetime
+      nullable: true
+    duration:
+      type: dateinterval
+      nullable: true
+    noTime:
+      column: no_time
+      type: boolean
+    summary:
+      type: string
+      nullable: true
+    url:
+      type: string
+      nullable: true
+    location:
+      type: string
+      nullable: true
+    locationTitle:
+      column: location_title
+      type: string
+      nullable: true
+    locationGeo:
+      column: location_geo
+      type: string
+      nullable: true
+    summary:
+      type: string
+      nullable: true
+    organizer:
+      type: string
+      nullable: true
+    transparency:
+      type: string
+      nullable: true
+    useTimezone:
+      column: use_timezone
+      type: boolean
+    sequence:
+      type: integer
+    description:
+      type: string
+      nullable: true
+    status:
+      type: string
+      nullable: true
+    created:
+      type: datetime
+    modified:
+      type: datetime
+    useUtc:
+      column: use_utc
+      type: boolean
+    cancelled:
+      type: boolean
+      nullable: true
+  oneToOne:
+    recurrenceRule:
+      targetEntity: \Xima\ICalBundle\Entity\Property\Event\RecurrenceRule
+      cascade: ["persist"]
+      joinColumn:
+        name: recurrence_rule_id
+        referencedColumnName: id
+        onDelete: CASCADE

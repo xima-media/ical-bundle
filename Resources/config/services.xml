@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="sonata.admin.ical.event" class="Xima\ICalBundle\Admin\EventAdmin">
+          <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false"/>
+          <argument />
+          <argument>Xima\ICalBundle\Entity\Component\Event</argument>
+          <argument />
+          <call method="setTranslationDomain">
+              <argument>XimaICalBundle</argument>
+          </call>
+      </service>
+      <service id="sonata.admin.ical.recurrence_rule" class="Xima\ICalBundle\Admin\RecurrenceRuleAdmin">
+          <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false"/>
+          <argument />
+          <argument>Xima\ICalBundle\Entity\Property\Event\RecurrenceRule</argument>
+          <argument />
+          <call method="setTranslationDomain">
+              <argument>XimaICalBundle</argument>
+          </call>
+      </service>
+    </services>
+
+</container>

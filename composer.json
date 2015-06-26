@@ -1,0 +1,20 @@
+{
+    "name" : "xima-media/ical-bundle",
+    "description" : "The Xima iCal Bundle",
+    "type" : "symfony-bundle",
+    "authors" : [{
+            "name" : "Wolfram Eberius",
+            "email" : "wolfram.eberius@xima.de"
+        }
+        ],
+    "require": {
+        "eluceo/ical": "0.7.0",
+        "herrera-io/doctrine-dateinterval": "1.*"
+
+    },
+    "autoload": {
+        "psr-4": {
+            "Xima\\ICalBundle\\": ""
+        }
+    }
+}

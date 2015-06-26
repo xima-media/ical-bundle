@@ -1,0 +1,44 @@
+Xima\ICalBundle\Entity\Property\Event\RecurrenceRule:
+  type: entity
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    freq:
+      type: string
+      length: 50
+      nullable: true
+    interval:
+      type: integer
+      nullable: true
+      column: `interval`
+    count:
+      type: integer
+      nullable: true
+      column: `count`
+    byMonth:
+      length: 50
+      nullable: true
+    byWeekNo:
+      length: 50
+      nullable: true
+    byYearDay:
+      length: 50
+      nullable: true
+    byMonthDay:
+      length: 50
+      nullable: true
+    byDay:
+      length: 50
+      nullable: true
+    byHour:
+      length: 50
+      nullable: true
+    byMinute:
+      length: 50
+      nullable: true
+    bySecond:
+      length: 50
+      nullable: true
