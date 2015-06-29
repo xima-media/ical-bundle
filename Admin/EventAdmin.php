@@ -21,7 +21,6 @@ class EventAdmin extends Admin
                 'edit'   => 'inline',
                 'inline' => 'table'
             ))
-            ->add('uniqueId','hidden',array('attr'=>array("hidden" => true)))
         ;
     }
 
