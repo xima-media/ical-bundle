@@ -1,5 +1,7 @@
 <?php
 
+
+
 namespace Xima\ICalBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
@@ -16,10 +18,10 @@ class EventAdmin extends Admin
             ->add('dtStart', 'sonata_type_datetime_picker')
             ->add('dtEnd', 'sonata_type_datetime_picker')
             ->add('recurrenceRule', 'sonata_type_admin', array(
-                'required' => false
+                'required' => false,
             ), array(
-                'edit'   => 'inline',
-                'inline' => 'table'
+                'edit' => 'inline',
+                'inline' => 'table',
             ))
         ;
     }

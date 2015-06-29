@@ -1,5 +1,7 @@
 <?php
 
+
+
 namespace Xima\ICalBundle\Entity\Property\Event;
 
 class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
@@ -9,13 +11,14 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
      */
     private $id;
     
-    public function __get($name) 
+    public function __get($name)
     {
         return $this->$name;
     }
     
     /**
      * Make the $month value an integer to make Sonata compatible to iCal package.
+     *
      * @see \Eluceo\iCal\Property\Event\RecurrenceRule::setByMonth()
      */
     public function setByMonth($month)
@@ -28,7 +31,7 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
         return get_class($this);
     }
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */

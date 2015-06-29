@@ -1,14 +1,15 @@
 <?php
 
+
+
 namespace Xima\ICalBundle\Entity\Component;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Wolfram Eberius <wolfram.eberius@xima.de>
- * @todo Map missing properties: attendees and categories
  *
+ * @todo Map missing properties: attendees and categories
  */
 class Event extends \Eluceo\iCal\Component\Event
 {
@@ -17,9 +18,9 @@ class Event extends \Eluceo\iCal\Component\Event
      */
     protected $id;
     
-    public function __construct() {
-        
-        parent::__construct(Event::generateUniqueId());
+    public function __construct()
+    {
+        parent::__construct(self::generateUniqueId());
     }
     
     public function __get($name)
@@ -32,10 +33,10 @@ class Event extends \Eluceo\iCal\Component\Event
         return get_class($this);
     }
     
-    public static function generateUniqueId() {
-        
+    public static function generateUniqueId()
+    {
         $request = Request::createFromGlobals();
-        $uniqueId = time().'-'.get_current_user().'@'. $request->server->get('SERVER_NAME');
+        $uniqueId = time().'-'.get_current_user().'@'.$request->server->get('SERVER_NAME');
         
         return $uniqueId;
     }

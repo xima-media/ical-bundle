@@ -1,5 +1,7 @@
 <?php
 
+
+
 namespace Xima\ICalBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
@@ -15,12 +17,12 @@ class RecurrenceRuleAdmin extends Admin
     {
         $formMapper
             ->add('freq', 'choice', array(
-        	   'choices' => array (
-        	       RecurrenceRule::FREQ_DAILY => RecurrenceRule::FREQ_DAILY,
-        	       RecurrenceRule::FREQ_MONTHLY => RecurrenceRule::FREQ_MONTHLY,
-        	       RecurrenceRule::FREQ_WEEKLY => RecurrenceRule::FREQ_WEEKLY,
-        	       RecurrenceRule::FREQ_YEARLY => RecurrenceRule::FREQ_YEARLY,
-        	   )))
+               'choices' => array(
+                   RecurrenceRule::FREQ_DAILY => RecurrenceRule::FREQ_DAILY,
+                   RecurrenceRule::FREQ_MONTHLY => RecurrenceRule::FREQ_MONTHLY,
+                   RecurrenceRule::FREQ_WEEKLY => RecurrenceRule::FREQ_WEEKLY,
+                   RecurrenceRule::FREQ_YEARLY => RecurrenceRule::FREQ_YEARLY,
+               ), ))
             ->add('interval', 'integer', array('required' => false))
             ->add('count', 'integer', array('required' => false))
             ->add('byMonth')
