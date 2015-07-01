@@ -4,8 +4,13 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="xima.ical.admin.event.class">Xima\ICalBundle\Admin\EventAdmin</parameter>
+        <parameter key="xima.ical.admin.recurrencerule.class">Xima\ICalBundle\Admin\RecurrenceRuleAdmin</parameter>
+    </parameters>
+
     <services>
-        <service id="sonata.admin.ical.event" class="Xima\ICalBundle\Admin\EventAdmin">
+        <service id="xima.ical.admin.ical.event" class="%xima.ical.admin.event.class%">
           <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false"/>
           <argument />
           <argument>Xima\ICalBundle\Entity\Component\Event</argument>
@@ -14,7 +19,7 @@
               <argument>XimaICalBundle</argument>
           </call>
       </service>
-      <service id="sonata.admin.ical.recurrence_rule" class="Xima\ICalBundle\Admin\RecurrenceRuleAdmin">
+      <service id="xima.ical.admin.ical.recurrencerule" class="%xima.ical.admin.recurrencerule.class%">
           <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false"/>
           <argument />
           <argument>Xima\ICalBundle\Entity\Property\Event\RecurrenceRule</argument>

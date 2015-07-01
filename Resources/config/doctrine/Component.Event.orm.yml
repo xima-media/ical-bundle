@@ -76,6 +76,7 @@ Xima\ICalBundle\Entity\Component\Event:
     recurrenceRule:
       targetEntity: \Xima\ICalBundle\Entity\Property\Event\RecurrenceRule
       cascade: ["persist"]
+      orphanRemoval: true
       joinColumn:
         name: recurrence_rule_id
         referencedColumnName: id
