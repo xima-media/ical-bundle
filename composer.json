@@ -8,7 +8,7 @@
         }
         ],
     "require": {
-        "eluceo/ical": "0.7.0",
+        "eluceo/ical": "dev-event-relationships",
         "herrera-io/doctrine-dateinterval": "1.*"
 
     },
@@ -16,5 +16,11 @@
         "psr-4": {
             "Xima\\ICalBundle\\": ""
         }
-    }
+    },
+    "repositories": [
+        {
+             "type": "vcs",
+             "url": "https://github.com/xima-media/iCal"
+        }
+    ]
 }
