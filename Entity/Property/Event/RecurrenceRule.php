@@ -4,8 +4,6 @@ namespace Xima\ICalBundle\Entity\Property\Event;
 
 class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
 {
-    const FREQ_NONE = 'NONE';
-
     /**
      * @var int
      */

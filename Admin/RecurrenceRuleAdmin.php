@@ -16,7 +16,6 @@ class RecurrenceRuleAdmin extends Admin
         $formMapper
             ->add('freq', 'choice', array(
                'choices' => array(
-                   RecurrenceRule::FREQ_NONE => RecurrenceRule::FREQ_NONE,
                    RecurrenceRule::FREQ_DAILY => RecurrenceRule::FREQ_DAILY,
                    RecurrenceRule::FREQ_MONTHLY => RecurrenceRule::FREQ_MONTHLY,
                    RecurrenceRule::FREQ_WEEKLY => RecurrenceRule::FREQ_WEEKLY,
