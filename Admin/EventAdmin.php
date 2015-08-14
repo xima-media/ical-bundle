@@ -19,7 +19,8 @@ class EventAdmin extends Admin
                 'required' => false
             ), array(
                 'edit'   => 'inline',
-                'inline' => 'table'
+                'inline' => 'table',
+                'admin_code' => 'xima.ical.admin.ical.recurrence_rule'
             ))
         ;
     }

@@ -1,0 +1,15 @@
+Xima\ICalBundle\Entity\Property\Event\RecurrenceId:
+  type: entity
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    dateTime:
+          column: date_time
+          type: datetime
+    range:
+          column: range
+          type: string
+          nullable: true

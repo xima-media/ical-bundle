@@ -4,6 +4,7 @@ namespace Xima\ICalBundle\Entity\Component;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\Request;
+use Xima\ICalBundle\Entity\Property\Event\RecurrenceId;
 
 /**
  * @author Wolfram Eberius <wolfram.eberius@xima.de>
@@ -15,8 +16,18 @@ class Event extends \Eluceo\iCal\Component\Event
     /**
      * @var int
      */
-    protected $id;
-    
+    private $id;
+
+    /**
+     * @var \Event
+     */
+    private $parentEvent;
+
+    /**
+     * @var RecurrenceId
+     */
+    private $recurrenceId;
+
     public function __construct()
     {
         parent::__construct(Event::generateUniqueId());
@@ -44,6 +55,42 @@ class Event extends \Eluceo\iCal\Component\Event
     {
         $this->recurrenceRule = null;
     
+        return $this;
+    }
+
+    /**
+     * @return \Event
+     */
+    public function getParentEvent()
+    {
+        return $this->parentEvent;
+    }
+
+    /**
+     * @param \Event $parentEvent
+     * @return Event
+     */
+    public function setParentEvent($parentEvent)
+    {
+        $this->parentEvent = $parentEvent;
+        return $this;
+    }
+
+    /**
+     * @return RecurrenceId
+     */
+    public function getRecurrenceId()
+    {
+        return $this->recurrenceId;
+    }
+
+    /**
+     * @param RecurrenceId $recurrenceId
+     * @return Event
+     */
+    public function setRecurrenceId($recurrenceId)
+    {
+        $this->recurrenceId = $recurrenceId;
         return $this;
     }
 }

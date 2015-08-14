@@ -72,6 +72,9 @@ Xima\ICalBundle\Entity\Component\Event:
     cancelled:
       type: boolean
       nullable: true
+    exDates:
+      type: json
+      nullable: true
   oneToOne:
     recurrenceRule:
       targetEntity: \Xima\ICalBundle\Entity\Property\Event\RecurrenceRule
@@ -81,3 +84,17 @@ Xima\ICalBundle\Entity\Component\Event:
         name: recurrence_rule_id
         referencedColumnName: id
         onDelete: CASCADE
+    recurrenceId:
+      targetEntity: \Xima\ICalBundle\Entity\Property\Event\RecurrenceId
+      cascade: ["persist"]
+      orphanRemoval: true
+      joinColumn:
+        name: recurrence_id
+        referencedColumnName: id
+        onDelete: CASCADE
+    parentEvent:
+      targetEntity: \Xima\ICalBundle\Entity\Component\Event
+      cascade: ["persist"]
+      joinColumn:
+        name: parent_event_id
+        referencedColumnName: id

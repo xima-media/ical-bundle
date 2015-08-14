@@ -19,7 +19,7 @@
               <argument>XimaICalBundle</argument>
           </call>
       </service>
-      <service id="xima.ical.admin.ical.recurrencerule" class="%xima.ical.admin.recurrencerule.class%">
+      <service id="xima.ical.admin.ical.recurrence_rule" class="%xima.ical.admin.recurrencerule.class%">
           <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false"/>
           <argument />
           <argument>Xima\ICalBundle\Entity\Property\Event\RecurrenceRule</argument>

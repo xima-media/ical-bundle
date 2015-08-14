@@ -42,3 +42,7 @@ Xima\ICalBundle\Entity\Property\Event\RecurrenceRule:
     bySecond:
       length: 50
       nullable: true
+    until:
+      column: dt_start
+      type: datetime
+      nullable: true

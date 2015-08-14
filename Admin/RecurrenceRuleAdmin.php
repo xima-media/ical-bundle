@@ -22,8 +22,9 @@ class RecurrenceRuleAdmin extends Admin
                    RecurrenceRule::FREQ_WEEKLY => RecurrenceRule::FREQ_WEEKLY,
                    RecurrenceRule::FREQ_YEARLY => RecurrenceRule::FREQ_YEARLY,
                )))
-            ->add('interval', 'integer', array('required' => false))
+            ->add('until', 'sonata_type_datetime_picker')
             ->add('count', 'integer', array('required' => false))
+            ->add('interval', 'integer', array('required' => false))
             ->add('byMonth')
             ->add('byWeekNo')
             ->add('byYearDay')
