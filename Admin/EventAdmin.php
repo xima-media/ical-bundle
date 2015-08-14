@@ -16,11 +16,11 @@ class EventAdmin extends Admin
             ->add('dtStart', 'sonata_type_datetime_picker')
             ->add('dtEnd', 'sonata_type_datetime_picker')
             ->add('recurrenceRule', 'sonata_type_admin', array(
-                'required' => false
+                'required' => false,
             ), array(
-                'edit'   => 'inline',
+                'edit' => 'inline',
                 'inline' => 'table',
-                'admin_code' => 'xima.ical.admin.ical.recurrence_rule'
+                'admin_code' => 'xima.ical.admin.ical.recurrence_rule',
             ))
         ;
     }

@@ -21,7 +21,7 @@ class RecurrenceRuleAdmin extends Admin
                    RecurrenceRule::FREQ_MONTHLY => RecurrenceRule::FREQ_MONTHLY,
                    RecurrenceRule::FREQ_WEEKLY => RecurrenceRule::FREQ_WEEKLY,
                    RecurrenceRule::FREQ_YEARLY => RecurrenceRule::FREQ_YEARLY,
-               )))
+               ), ))
             ->add('until', 'sonata_type_datetime_picker')
             ->add('count', 'integer', array('required' => false))
             ->add('interval', 'integer', array('required' => false))
@@ -29,7 +29,16 @@ class RecurrenceRuleAdmin extends Admin
             ->add('byWeekNo')
             ->add('byYearDay')
             ->add('byMonthDay')
-            ->add('byDay')
+            ->add('byDay', 'choice', array(
+               'choices' => array(
+                   RecurrenceRule::WEEKDAY_MONDAY => RecurrenceRule::WEEKDAY_MONDAY,
+                   RecurrenceRule::WEEKDAY_TUESDAY => RecurrenceRule::WEEKDAY_TUESDAY,
+                   RecurrenceRule::WEEKDAY_WEDNESDAY => RecurrenceRule::WEEKDAY_WEDNESDAY,
+                   RecurrenceRule::WEEKDAY_THURSDAY => RecurrenceRule::WEEKDAY_THURSDAY,
+                   RecurrenceRule::WEEKDAY_FRIDAY => RecurrenceRule::WEEKDAY_FRIDAY,
+                   RecurrenceRule::WEEKDAY_SATURDAY => RecurrenceRule::WEEKDAY_SATURDAY,
+                   RecurrenceRule::WEEKDAY_SUNDAY => RecurrenceRule::WEEKDAY_SUNDAY, ), )
+                )
             ->add('byHour', 'integer', array('required' => false))
             ->add('byMinute', 'integer', array('required' => false))
             ->add('bySecond', 'integer', array('required' => false))

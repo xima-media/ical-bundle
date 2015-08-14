@@ -43,6 +43,6 @@ Xima\ICalBundle\Entity\Property\Event\RecurrenceRule:
       length: 50
       nullable: true
     until:
-      column: dt_start
+      column: until
       type: datetime
       nullable: true
