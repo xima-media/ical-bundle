@@ -26,11 +26,6 @@ class Event extends \Eluceo\iCal\Component\Event
         parent::__construct(self::generateUniqueId());
     }
 
-    public function __get($name)
-    {
-        return $this->$name;
-    }
-
     public function __toString()
     {
         return get_class($this);
@@ -70,4 +65,21 @@ class Event extends \Eluceo\iCal\Component\Event
 
         return $this;
     }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    /**
+     * @return \DateTime
+     */
+    public function getDtStart()
+    {
+        return $this->dtStart;
+    }
+ 
 }

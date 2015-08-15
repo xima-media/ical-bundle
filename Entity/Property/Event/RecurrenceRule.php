@@ -9,11 +9,6 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
      */
     private $id;
 
-    public function __get($name)
-    {
-        return $this->$name;
-    }
-
     /**
      * An empty freq value is only allowed for this bundle.
      *
@@ -40,13 +35,52 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
     {
         return get_class($this);
     }
+    
     /**
-     * Get id.
-     *
      * @return int
      */
     public function getId()
     {
         return $this->id;
+    }
+    
+    /**
+     * @return NULL|string
+     */
+    public function getByDay()
+    {
+        return $this->byDay;
+    }
+    
+    /**
+     * @return NULL|string
+     */
+    public function getByMonth()
+    {
+        return $this->byMonth;
+    }
+    
+    /**
+     * @return NULL|string
+     */
+    public function getByWeekNo()
+    {
+        return $this->byWeekNo;
+    }
+    
+    /**
+     * @return NULL|string
+     */
+    public function getByYearDay()
+    {
+        return $this->byYearDay;
+    }
+    
+    /**
+     * @return NULL|string
+     */
+    public function getByMonthDay()
+    {
+        return $this->byMonthDay;
     }
 }
