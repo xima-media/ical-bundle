@@ -3,11 +3,13 @@
 namespace Xima\ICalBundle\Entity\Component;
 
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @author Wolfram Eberius <wolfram.eberius@xima.de>
- *
  * @todo Map missing properties: attendees and categories
+ * 
+ * @ORM\HasLifecycleCallbacks
  */
 class Event extends \Eluceo\iCal\Component\Event
 {
@@ -45,7 +47,44 @@ class Event extends \Eluceo\iCal\Component\Event
 
         return $this;
     }
-
+    
+    /** @ORM\PrePersist */
+    public function prePersist()
+    {
+        $this->preSave();
+    }
+    
+    /** @ORM\PreUpdate */
+    public function preUpdate()
+    {
+        $this->preSave();
+    }
+    
+    private function preSave()
+    {
+        //this->exDates: convert DateTimes to Timestamps
+        $exDates = $this->exDates;
+        $this->exDates = array();
+         
+        foreach ($exDates as $exDate) {
+            $this->exDates[] = $exDate->getTimestamp();
+        }
+    }
+    
+    /** @ORM\PostLoad */
+    public function postLoad()
+    {
+        //this->exDates: convert Timestamps to DateTimes
+        $exDates = $this->exDates;
+        $this->exDates = array();
+         
+        foreach ($exDates as $exDate) {
+            $dateTime = new \DateTime();
+            $dateTime->setTimestamp($exDate);
+            $this->exDates[] = $dateTime;
+        }
+    }
+    
     /**
      * @return \Event
      */
