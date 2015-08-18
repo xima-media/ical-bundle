@@ -98,3 +98,7 @@ Xima\ICalBundle\Entity\Component\Event:
       joinColumn:
         name: parent_event_id
         referencedColumnName: id
+  lifecycleCallbacks:
+    prePersist: [ prePersist ]
+    preUpdate: [ preUpdate ]
+    postLoad: [ postLoad ]

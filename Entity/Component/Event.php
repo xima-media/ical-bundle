@@ -46,6 +46,40 @@ class Event extends \Eluceo\iCal\Component\Event
         return $this;
     }
 
+    public function prePersist()
+    {
+        $this->preSave();
+    }
+
+    public function preUpdate()
+    {
+        $this->preSave();
+    }
+
+    private function preSave()
+    {
+        //this->exDates: convert DateTimes to Timestamps
+        $exDates = $this->exDates;
+        $this->exDates = array();
+
+        foreach ($exDates as $exDate) {
+            $this->exDates[] = $exDate->getTimestamp();
+        }
+    }
+
+    public function postLoad()
+    {
+        //this->exDates: convert Timestamps to DateTimes
+        $exDates = $this->exDates;
+        $this->exDates = array();
+
+        foreach ($exDates as $exDate) {
+            $dateTime = new \DateTime();
+            $dateTime->setTimestamp($exDate);
+            $this->exDates[] = $dateTime;
+        }
+    }
+
     /**
      * @return \Event
      */
@@ -73,7 +107,7 @@ class Event extends \Eluceo\iCal\Component\Event
     {
         return $this->id;
     }
-    
+
     /**
      * @return \DateTime
      */
@@ -81,5 +115,4 @@ class Event extends \Eluceo\iCal\Component\Event
     {
         return $this->dtStart;
     }
- 
 }

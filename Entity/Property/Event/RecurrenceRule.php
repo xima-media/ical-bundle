@@ -35,7 +35,7 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
     {
         return get_class($this);
     }
-    
+
     /**
      * @return int
      */
@@ -43,7 +43,7 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
     {
         return $this->id;
     }
-    
+
     /**
      * @return NULL|string
      */
@@ -51,7 +51,7 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
     {
         return $this->byDay;
     }
-    
+
     /**
      * @return NULL|string
      */
@@ -59,7 +59,7 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
     {
         return $this->byMonth;
     }
-    
+
     /**
      * @return NULL|string
      */
@@ -67,7 +67,7 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
     {
         return $this->byWeekNo;
     }
-    
+
     /**
      * @return NULL|string
      */
@@ -75,7 +75,7 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
     {
         return $this->byYearDay;
     }
-    
+
     /**
      * @return NULL|string
      */
