@@ -10,6 +10,6 @@ Xima\ICalBundle\Entity\Property\Event\RecurrenceId:
           column: date_time
           type: datetime
     range:
-          column: range
+          column: `range`
           type: string
           nullable: true

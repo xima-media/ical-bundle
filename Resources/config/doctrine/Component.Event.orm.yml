@@ -9,7 +9,6 @@ Xima\ICalBundle\Entity\Component\Event:
   fields:
     uniqueId:
       column: unique_id
-      unique: true
       type: string
     dtStart:
       column: dt_start
