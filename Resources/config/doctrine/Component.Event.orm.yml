@@ -77,26 +77,16 @@ Xima\ICalBundle\Entity\Component\Event:
   oneToOne:
     recurrenceRule:
       targetEntity: \Xima\ICalBundle\Entity\Property\Event\RecurrenceRule
-      cascade: ["persist"]
+      cascade: ["all"]
       joinColumn:
         name: recurrence_rule_id
         referencedColumnName: id
-        onDelete: CASCADE
     recurrenceId:
       targetEntity: \Xima\ICalBundle\Entity\Property\Event\RecurrenceId
-      cascade: ["persist"]
+      cascade: ["all"]
       orphanRemoval: true
       joinColumn:
         name: recurrence_id
         referencedColumnName: id
-        onDelete: CASCADE
-    parentEvent:
-      targetEntity: \Xima\ICalBundle\Entity\Component\Event
-      cascade: ["persist"]
-      joinColumn:
-        name: parent_event_id
-        referencedColumnName: id
   lifecycleCallbacks:
-    prePersist: [ prePersist ]
-    preUpdate: [ preUpdate ]
     postLoad: [ postLoad ]

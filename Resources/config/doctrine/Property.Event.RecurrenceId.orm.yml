@@ -13,3 +13,5 @@ Xima\ICalBundle\Entity\Property\Event\RecurrenceId:
           column: `range`
           type: string
           nullable: true
+  lifecycleCallbacks:
+    postLoad: [ postLoad ]

@@ -16,11 +16,6 @@ class Event extends \Eluceo\iCal\Component\Event
      */
     private $id;
 
-    /**
-     * @var \Event
-     */
-    private $parentEvent;
-
     public function __construct()
     {
         parent::__construct(self::generateUniqueId());
@@ -39,63 +34,21 @@ class Event extends \Eluceo\iCal\Component\Event
         return $uniqueId;
     }
 
-    public function removeRecurrenceRule()
-    {
-        $this->recurrenceRule = null;
-
-        return $this;
-    }
-
-    public function prePersist()
-    {
-        $this->preSave();
-    }
-
-    public function preUpdate()
-    {
-        $this->preSave();
-    }
-
-    private function preSave()
-    {
-        //this->exDates: convert DateTimes to Timestamps
-        $exDates = $this->exDates;
-        $this->exDates = array();
-
-        foreach ($exDates as $exDate) {
-            $this->exDates[] = $exDate->getTimestamp();
-        }
-    }
-
     public function postLoad()
     {
-        //this->exDates: convert Timestamps to DateTimes
-        $exDates = $this->exDates;
+        //this->exDates: convert json to DateTimes
+        $exDatesJson = $this->exDates;
         $this->exDates = array();
 
-        foreach ($exDates as $exDate) {
-            $dateTime = new \DateTime();
-            $dateTime->setTimestamp($exDate);
+        foreach ($exDatesJson as $exDateJson) {
+            $dateTime = new \DateTime($exDateJson['date'], new \DateTimeZone($exDateJson['timezone']));
             $this->exDates[] = $dateTime;
         }
     }
 
-    /**
-     * @return \Event
-     */
-    public function getParentEvent()
+    public function removeRecurrenceRule()
     {
-        return $this->parentEvent;
-    }
-
-    /**
-     * @param \Event $parentEvent
-     *
-     * @return Event
-     */
-    public function setParentEvent($parentEvent)
-    {
-        $this->parentEvent = $parentEvent;
+        $this->recurrenceRule = null;
 
         return $this;
     }
