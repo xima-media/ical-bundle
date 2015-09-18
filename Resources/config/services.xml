@@ -10,24 +10,27 @@
     </parameters>
 
     <services>
-        <service id="xima.ical.admin.ical.event" class="%xima.ical.admin.event.class%">
-          <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false"/>
-          <argument />
-          <argument>Xima\ICalBundle\Entity\Component\Event</argument>
-          <argument />
-          <call method="setTranslationDomain">
-              <argument>XimaICalBundle</argument>
-          </call>
-      </service>
-      <service id="xima.ical.admin.ical.recurrence_rule" class="%xima.ical.admin.recurrencerule.class%">
-          <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false"/>
-          <argument />
-          <argument>Xima\ICalBundle\Entity\Property\Event\RecurrenceRule</argument>
-          <argument />
-          <call method="setTranslationDomain">
-              <argument>XimaICalBundle</argument>
-          </call>
-      </service>
+        <service id="xima.ical.admin.event" class="%xima.ical.admin.event.class%">
+            <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false"/>
+            <argument />
+            <argument>Xima\ICalBundle\Entity\Component\Event</argument>
+            <argument />
+            <call method="setTranslationDomain">
+                <argument>XimaICalBundle</argument>
+            </call>
+        </service>
+        <service id="xima.ical.admin.recurrence_rule" class="%xima.ical.admin.recurrencerule.class%">
+            <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false"/>
+            <argument />
+            <argument>Xima\ICalBundle\Entity\Property\Event\RecurrenceRule</argument>
+            <argument />
+            <call method="setTranslationDomain">
+                <argument>XimaICalBundle</argument>
+            </call>
+        </service>
+        <service id="xima.ical.subscriber.event" class="Xima\ICalBundle\EventListener\Entity\Component\EventEntitySubscriber">
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
     </services>
 
 </container>
