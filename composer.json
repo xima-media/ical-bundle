@@ -9,8 +9,7 @@
         ],
     "require": {
         "eluceo/ical": "dev-event-relationships",
-        "herrera-io/doctrine-dateinterval": "1.*"
-
+        "herrera-io/doctrine-dateinterval": "dev-master"
     },
     "autoload": {
         "psr-4": {
