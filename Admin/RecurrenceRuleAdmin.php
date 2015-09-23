@@ -15,12 +15,13 @@ class RecurrenceRuleAdmin extends Admin
     {
         $formMapper
             ->add('freq', 'choice', array(
-               'choices' => array(
-                   RecurrenceRule::FREQ_DAILY => RecurrenceRule::FREQ_DAILY,
-                   RecurrenceRule::FREQ_MONTHLY => RecurrenceRule::FREQ_MONTHLY,
-                   RecurrenceRule::FREQ_WEEKLY => RecurrenceRule::FREQ_WEEKLY,
-                   RecurrenceRule::FREQ_YEARLY => RecurrenceRule::FREQ_YEARLY,
-               ), ))
+                'choices' => array(
+                    '' => 'Choose a recurrence',
+                    RecurrenceRule::FREQ_DAILY => RecurrenceRule::FREQ_DAILY,
+                    RecurrenceRule::FREQ_MONTHLY => RecurrenceRule::FREQ_MONTHLY,
+                    RecurrenceRule::FREQ_WEEKLY => RecurrenceRule::FREQ_WEEKLY,
+                    RecurrenceRule::FREQ_YEARLY => RecurrenceRule::FREQ_YEARLY,
+                ), ))
             ->add('until', 'sonata_type_datetime_picker')
             ->add('count', 'integer', array('required' => false))
             ->add('interval', 'integer', array('required' => false))
@@ -29,31 +30,19 @@ class RecurrenceRuleAdmin extends Admin
             ->add('byYearDay')
             ->add('byMonthDay')
             ->add('byDay', 'choice', array(
-               'choices' => array(
-                   RecurrenceRule::WEEKDAY_MONDAY => RecurrenceRule::WEEKDAY_MONDAY,
-                   RecurrenceRule::WEEKDAY_TUESDAY => RecurrenceRule::WEEKDAY_TUESDAY,
-                   RecurrenceRule::WEEKDAY_WEDNESDAY => RecurrenceRule::WEEKDAY_WEDNESDAY,
-                   RecurrenceRule::WEEKDAY_THURSDAY => RecurrenceRule::WEEKDAY_THURSDAY,
-                   RecurrenceRule::WEEKDAY_FRIDAY => RecurrenceRule::WEEKDAY_FRIDAY,
-                   RecurrenceRule::WEEKDAY_SATURDAY => RecurrenceRule::WEEKDAY_SATURDAY,
-                   RecurrenceRule::WEEKDAY_SUNDAY => RecurrenceRule::WEEKDAY_SUNDAY, ), )
-                )
+                    'choices' => array(
+                        '' => 'Choose a day',
+                        RecurrenceRule::WEEKDAY_MONDAY => RecurrenceRule::WEEKDAY_MONDAY,
+                        RecurrenceRule::WEEKDAY_TUESDAY => RecurrenceRule::WEEKDAY_TUESDAY,
+                        RecurrenceRule::WEEKDAY_WEDNESDAY => RecurrenceRule::WEEKDAY_WEDNESDAY,
+                        RecurrenceRule::WEEKDAY_THURSDAY => RecurrenceRule::WEEKDAY_THURSDAY,
+                        RecurrenceRule::WEEKDAY_FRIDAY => RecurrenceRule::WEEKDAY_FRIDAY,
+                        RecurrenceRule::WEEKDAY_SATURDAY => RecurrenceRule::WEEKDAY_SATURDAY,
+                        RecurrenceRule::WEEKDAY_SUNDAY => RecurrenceRule::WEEKDAY_SUNDAY, ), )
+            )
             ->add('byHour', 'integer', array('required' => false))
             ->add('byMinute', 'integer', array('required' => false))
             ->add('bySecond', 'integer', array('required' => false))
-        ;
-    }
-
-    // Fields to be shown on filter forms
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-    }
-
-    // Fields to be shown on lists
-    protected function configureListFields(ListMapper $listMapper)
-    {
-        $listMapper
-            ->addIdentifier('id')
         ;
     }
 }

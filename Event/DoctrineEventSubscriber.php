@@ -1,12 +1,11 @@
 <?php
-namespace Xima\ICalBundle\EventListener\Entity\Component;
+namespace Xima\ICalBundle\Event;
 
-use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Event\OnFlushEventArgs ;
-use Doctrine\Common\EventSubscriber;
 use Xima\ICalBundle\Entity\Component\Event;
+use Xima\ICalBundle\Util\EventUtil;
 
-class EventEntitySubscriber implements EventSubscriber
+class DoctrineEventSubscriber implements \Doctrine\Common\EventSubscriber
 {
     public function getSubscribedEvents()
     {
@@ -18,19 +17,22 @@ class EventEntitySubscriber implements EventSubscriber
     /**
      * Update event's exclude dates and recurrenceIds when start datetime changes.
      *
-     * @param PreUpdateEventArgs $eventArgs
+     * @param OnFlushEventArgs $eventArgs
      */
     public function onFlush(OnFlushEventArgs $eventArgs)
     {
         $em = $eventArgs->getEntityManager();
         $uow = $em->getUnitOfWork();
 
-        $entities = $uow->getScheduledEntityUpdates();
+        $entities = array_merge($uow->getScheduledEntityUpdates(), $uow->getScheduledEntityInsertions());
+        $eventUtil = new EventUtil($em);
 
         foreach ($entities as $entity) {
             if (!($entity instanceof Event)) {
                 continue;
             }
+
+            $eventUtil->cleanUpEvent($entity);
 
             /** @var $entity \Xima\ICalBundle\Entity\Component\Event */
             $changeSet = $uow->getEntityChangeSet($entity);

@@ -2,10 +2,13 @@
 
 namespace Xima\ICalBundle\Admin;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Xima\ICalBundle\Entity\Component\Event;
+use Xima\ICalBundle\Event\FormEventSubscriber;
 
 class EventAdmin extends Admin
 {
@@ -15,30 +18,18 @@ class EventAdmin extends Admin
         $formMapper
             ->add('dtStart', 'sonata_type_datetime_picker')
             ->add('dtEnd', 'sonata_type_datetime_picker')
-            ->add('recurrenceRule', 'sonata_type_admin', array(
-                'required' => false,
-            ), array(
-                'edit' => 'inline',
-                'inline' => 'table',
-                'admin_code' => 'xima.ical.admin.ical.recurrence_rule',
-            ))
-        ;
-    }
-
-    // Fields to be shown on filter forms
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-        $datagridMapper
-            ->add('dtStart')
-            ->add('dtEnd')
-        ;
-    }
-
-    // Fields to be shown on lists
-    protected function configureListFields(ListMapper $listMapper)
-    {
-        $listMapper
-            ->addIdentifier('id')
+            ->add(
+                'recurrenceRule',
+                'sonata_type_admin',
+                array(
+                    'required' => false,
+                ),
+                array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'admin_code' => 'xima_ical.sonata_admin.recurrence_rule',
+                )
+            )
         ;
     }
 }
