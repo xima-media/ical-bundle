@@ -37,7 +37,7 @@ class DoctrineEventSubscriber implements \Doctrine\Common\EventSubscriber
             /** @var $entity \Xima\ICalBundle\Entity\Component\Event */
             $changeSet = $uow->getEntityChangeSet($entity);
 
-            if (isset($changeSet['dtStart'])) {
+            if (isset($changeSet['dtStart']) && isset($changeSet['dtStart'][0])) {
                 $interval = $changeSet['dtStart'][0]->diff($entity->getDtStart());
                 foreach ($entity->getExDates() as $dateTime) {
                     $dateTime->add($interval);
