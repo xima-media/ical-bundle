@@ -1,5 +1,6 @@
 Xima\ICalBundle\Entity\Property\Event\RecurrenceId:
   type: entity
+  table: recurrence_id
   id:
     id:
       type: integer
