@@ -67,7 +67,7 @@ class ICalEvent extends \Xima\ICalBundle\Entity\Component\Event
 }
 ```
 
-**Note:** ORM auto_mapping should be enabled or configure XimaICalBundle manually in 'app/config/config.yml'.
+**Note:** ORM auto_mapping should be enabled or configure XimaICalBundle manually in `app/config/config.yml`.
 
 ##### 2. Update your database schema
 Use your the method of choice to update your database schema, e.g. doctrine migrations.
@@ -90,7 +90,7 @@ protected function iCalAction(Array $events)
     $vCalendar = new \Eluceo\iCal\Component\Calendar('myCalendar');
 
     foreach ($events as $event) {
-                $vCalendar->addComponent($event);
+        $vCalendar->addComponent($event);
     }
     
     $response = new Response();
