@@ -8,7 +8,7 @@
         }
         ],
     "require": {
-        "eluceo/ical": "dev-event-relationships",
+        "eluceo/ical": "dev-master",
         "herrera-io/doctrine-dateinterval": "dev-master",
         "sabre/vobject": "^3.4"
     },
