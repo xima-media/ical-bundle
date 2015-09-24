@@ -20,7 +20,7 @@
     "repositories": [
         {
              "type": "vcs",
-             "url": "https://github.com/xima-media/iCal"
+             "url": "https://github.com/xima-media/ical-bundle"
         }
     ]
 }
