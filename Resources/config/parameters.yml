@@ -1,0 +1,8 @@
+parameters:
+  xima.ical.dp_options:
+    datetime:
+      format: 'DD.MM.YYYY, HH::ii'
+      sideBySide: true
+    date:
+      format: 'DD.MM.YYYY'
+      pickTime: false

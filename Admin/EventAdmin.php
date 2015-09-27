@@ -18,8 +18,6 @@ class EventAdmin extends Admin
         $formMapper
             ->add('dtStart', 'sonata_type_datetime_picker')
             ->add('dtEnd', 'sonata_type_datetime_picker')
-            ->add('allDayStart', 'sonata_type_date_picker')
-            ->add('allDayEnd', 'sonata_type_date_picker')
             ->add('isAllDayEvent', 'checkbox')
             ->add(
                 'recurrenceRule',

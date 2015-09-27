@@ -5,8 +5,6 @@ jQuery(document).ready(function() {
         var row = jQuery(this).attr('id').split('_')[2];
         if( jQuery(this).prop('checked')){
             selectAllDayOption(row);
-        }else{
-            deselectAllDayOption(row);
         }
     });
 });
@@ -58,49 +56,57 @@ function addAllDayBehaviour() {
 }
 
 /*
- * Hide datetime pickers, show date pickers.
+ * Change date format to date only.
  *
  * @param row The event's table row.
  */
 function selectAllDayOption(row) {
-    hideColumnOfObject(jQuery("input[id*='_events_" + row + "_dtStart']"));
-    hideColumnOfObject(jQuery("input[id*='_events_" + row + "_dtEnd']"));
-    showColumnOfObject(jQuery("input[id*='_events_" + row + "_allDayStart']"));
-    showColumnOfObject(jQuery("input[id*='_events_" + row + "_allDayEnd']"));
+    var $format = 'DD.MM.YYYY';
+
+    var $inputStart = jQuery("input[id*='_events_" + row + "_dtStart']");
+    var $inputEnd = jQuery("input[id*='_events_" + row + "_dtEnd']");
+
+    jQuery.each([$inputStart, $inputEnd], function(index, $input) {
+        var $dp = $input.parent().data("DateTimePicker");
+        var $date = $dp.getDate();
+
+        $dp.destroy();
+        $input.data('dateFormat', $format);
+        $input.attr('data-date-format', $format);
+
+        $dp = $input.parent().datetimepicker({
+            format: $format,
+            pickTime: false
+        });
+        $dp = $input.parent().data("DateTimePicker");
+        $dp.setDate($date);
+    });
 }
 
 /*
- * Show datetime pickers, hide date pickers.
+ * Change date format to date and time.
  *
  * @param row The event's table row.
  */
 function deselectAllDayOption(row) {
-    showColumnOfObject(jQuery("input[id*='_events_" + row + "_dtStart']"));
-    showColumnOfObject(jQuery("input[id*='_events_" + row + "_dtEnd']"));
-    hideColumnOfObject(jQuery("input[id*='_events_" + row + "_allDayStart']"));
-    hideColumnOfObject(jQuery("input[id*='_events_" + row + "_allDayEnd']"));
-}
+    var $format = 'DD.MM.YYYY, HH:mm';
 
-/**
- * Show the column of the table that includes the given object.
- *
- * @param object
- */
-function showColumnOfObject(object) {
-    var index = object.closest('td').index();
-    var table = object.closest('table');
-    table.filter('th:nth-child('+index+')').show();
-    table.filter('td:nth-child('+index+')').show();
-}
+    var $inputStart = jQuery("input[id*='_events_" + row + "_dtStart']");
+    var $inputEnd = jQuery("input[id*='_events_" + row + "_dtEnd']");
 
-/**
- * Hide the column of the table that includes the given object.
- *
- * @param object
- */
-function hideColumnOfObject(object) {
-    var index = object.closest('td').index();
-    var table = object.closest('table');
-    table.filter('th:nth-child('+index+')').hide();
-    table.filter('td:nth-child('+index+')').hide();
+    jQuery.each([$inputStart, $inputEnd], function(index, $input) {
+        var $dp = $input.parent().data("DateTimePicker");
+        var $date = $dp.getDate();
+
+        $dp.destroy();
+        $input.data('dateFormat', $format);
+        $input.attr('data-date-format', $format);
+
+        $dp = $input.parent().datetimepicker({
+            format: $format,
+            pickTime: false
+        });
+        $dp = $input.parent().data("DateTimePicker");
+        $dp.setDate($date);
+    });
 }

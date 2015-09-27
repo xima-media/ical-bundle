@@ -21,16 +21,6 @@ class Event extends \Eluceo\iCal\Component\Event
      */
     private $isAllDayEvent;
 
-    /**
-     * @var \DateTime
-     */
-    private $allDayStart;
-
-    /**
-     * @var \DateTime
-     */
-    private $allDayEnd;
-
     public function __construct()
     {
         parent::__construct(self::generateUniqueId());
@@ -100,37 +90,4 @@ class Event extends \Eluceo\iCal\Component\Event
     {
         return $this->dtStart;
     }
-
-    /**
-     * @return \DateTime
-     */
-    public function getAllDayStart()
-    {
-        return $this->dtStart;
-    }
-
-    /**
-     * @param \DateTime $allDayStart
-     */
-    public function setAllDayStart($allDayStart)
-    {
-        $this->allDayStart = $allDayStart;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getAllDayEnd()
-    {
-        return $this->dtEnd;
-    }
-
-    /**
-     * @param \DateTime $allDayEnd
-     */
-    public function setAllDayEnd($allDayEnd)
-    {
-        $this->allDayEnd = $allDayEnd;
-    }
-
 }
