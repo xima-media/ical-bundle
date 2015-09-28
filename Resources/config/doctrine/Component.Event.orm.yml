@@ -13,11 +13,23 @@ Xima\ICalBundle\Entity\Component\Event:
     dtStart:
       column: dt_start
       type: datetime
-      nullable: true
     dtEnd:
       column: dt_end
       type: datetime
-      nullable: true
+    dateFrom:
+      column: date_from
+      type: date
+      nullable: false
+    timeFrom:
+      column: time_from
+      type: time
+    dateTo:
+      column: date_to
+      type: date
+      nullable: false
+    timeTo:
+      column: time_to
+      type: time
     duration:
       type: dateinterval
       nullable: true

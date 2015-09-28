@@ -16,9 +16,13 @@ class EventAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('dtStart', 'sonata_type_datetime_picker')
-            ->add('dtEnd', 'sonata_type_datetime_picker')
-            ->add('isAllDayEvent', 'checkbox')
+            ->add('dateFrom', 'sonata_type_date_picker')
+            ->add('timeFrom')
+            ->add('dateTo', 'sonata_type_date_picker')
+            ->add('timeTo')
+            ->add('noTime', 'checkbox', array(
+                'required' => false,
+            ))
             ->add(
                 'recurrenceRule',
                 'sonata_type_admin',

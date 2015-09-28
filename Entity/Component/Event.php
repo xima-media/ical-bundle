@@ -17,9 +17,24 @@ class Event extends \Eluceo\iCal\Component\Event
     private $id;
 
     /**
-     * @var bool
+     * @var \DateTime
      */
-    private $isAllDayEvent;
+    private $dateFrom;
+
+    /**
+     * @var \DateTime
+     */
+    private $timeFrom;
+
+    /**
+     * @var \DateTime
+     */
+    private $dateTo;
+
+    /**
+     * @var \DateTime
+     */
+    private $timeTo;
 
     public function __construct()
     {
@@ -58,23 +73,6 @@ class Event extends \Eluceo\iCal\Component\Event
         return $this;
     }
 
-    public function getIsAllDayEvent()
-    {
-        if ($this->getDtStart() && $this->getDtStart()->format("H:i") == "00:00" &&  $this->getDtEnd() && $this->getDtEnd()->format("H:i") == "00:00") {
-            return true;
-        }
-        return false;
-    }
-    /**
-     * Set all day.
-     *
-     * @param bool $isAllDayEvent
-     */
-    public function setIsAllDayEvent($isAllDayEvent)
-    {
-        $this->isAllDayEvent = $isAllDayEvent;
-    }
-
     /**
      * @return int
      */
@@ -89,5 +87,77 @@ class Event extends \Eluceo\iCal\Component\Event
     public function getDtStart()
     {
         return $this->dtStart;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isNoTime()
+    {
+        return $this->noTime;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateFrom()
+    {
+        return $this->dateFrom;
+    }
+
+    /**
+     * @param mixed $dateFrom
+     */
+    public function setDateFrom($dateFrom)
+    {
+        $this->dateFrom = $dateFrom;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTimeFrom()
+    {
+        return $this->timeFrom;
+    }
+
+    /**
+     * @param mixed $timeFrom
+     */
+    public function setTimeFrom($timeFrom)
+    {
+        $this->timeFrom = $timeFrom;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateTo()
+    {
+        return $this->dateTo;
+    }
+
+    /**
+     * @param mixed $dateTo
+     */
+    public function setDateTo($dateTo)
+    {
+        $this->dateTo = $dateTo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTimeTo()
+    {
+        return $this->timeTo;
+    }
+
+    /**
+     * @param mixed $timeTo
+     */
+    public function setTimeTo($timeTo)
+    {
+        $this->timeTo = $timeTo;
     }
 }

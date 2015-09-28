@@ -34,7 +34,12 @@ class EventUtil
      */
     public function getInstances(Event $event, $includeEditedEvents, \DateTime $dateFrom = null, \DateTime $dateTo = null)
     {
+        $instances = array();
+
         $dateFrom = ($dateFrom)? $dateFrom : $event->getDtStart();
+        if (!$dateFrom) {
+            return $instances;
+        }
         if (!$dateTo) {
             $dateTo = clone ($event->getDtStart());
             $dateTo->add(new \DateInterval('P1Y'));
@@ -43,8 +48,6 @@ class EventUtil
         if (!$dateFrom || !$dateTo) {
             throw new \Exception('Trying to get instances of a recurring event without dateFrom and/or dateTo being set.');
         }
-
-        $instances = array();
 
         //create the calendar
         $vCalendar = new Calendar($event->getUniqueId());

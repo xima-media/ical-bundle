@@ -33,6 +33,17 @@ class DoctrineEventSubscriber implements \Doctrine\Common\EventSubscriber
             }
 
             $eventUtil->cleanUpEvent($entity);
+            //merge dates and times, apply noTime setting
+            $entity->setDtStart($entity->getDateFrom());
+            $entity->getDtStart()->setTime($entity->getTimeFrom()->format('H'), $entity->getTimeFrom()->format('i'));
+
+            $entity->setDtEnd(clone($entity->getDateTo()));
+            $entity->getDtEnd()->setTime($entity->getTimeTo()->format('H'), $entity->getTimeTo()->format('i'));
+            if ($entity->isNoTime()) {
+                $entity->getDtEnd()->add(new \DateInterval('P1D'));
+            }
+
+            $uow->recomputeSingleEntityChangeSet($em->getClassMetadata(get_class($entity)), $entity);
 
             /** @var $entity \Xima\ICalBundle\Entity\Component\Event */
             $changeSet = $uow->getEntityChangeSet($entity);
