@@ -35,10 +35,24 @@ class DoctrineEventSubscriber implements \Doctrine\Common\EventSubscriber
             $eventUtil->cleanUpEvent($entity);
             //merge dates and times, apply noTime setting
             $entity->setDtStart($entity->getDateFrom());
-            $entity->getDtStart()->setTime($entity->getTimeFrom()->format('H'), $entity->getTimeFrom()->format('i'));
+            if ($entity->getTimeFrom() != null)
+            {
+                $entity->getDtStart()->setTime($entity->getTimeFrom()->format('H'), $entity->getTimeFrom()->format('i'));
+            } else {
+                $entity->getDtStart()->setTime(0,0);
+                $entity->setTimeFrom(new \DateTime('1970-01-01'));
+            }
 
             $entity->setDtEnd(clone($entity->getDateTo()));
-            $entity->getDtEnd()->setTime($entity->getTimeTo()->format('H'), $entity->getTimeTo()->format('i'));
+
+            if ($entity->getTimeTo() != null)
+            {
+                $entity->getDtEnd()->setTime($entity->getTimeTo()->format('H'), $entity->getTimeTo()->format('i'));
+            } else {
+                $entity->getDtEnd()->setTime(0,0);
+                $entity->setTimeTo(new \DateTime('1970-01-01'));
+            }
+
             if ($entity->isNoTime()) {
                 $entity->getDtEnd()->add(new \DateInterval('P1D'));
             }

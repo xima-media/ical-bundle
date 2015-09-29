@@ -1,12 +1,13 @@
 jQuery(document).ready(function() {
 
     //if 'isAllDayEvent' is checked, hide datetime picker and show date picker, otherwise hide the datepicker
-    jQuery('[id*="_isAllDayEvent"]').each(function(event){
+    jQuery('[id*="_noTime"]').each(function(event){
         var row = jQuery(this).attr('id').split('_')[2];
-        if( jQuery(this).prop('checked')){
+        if( jQuery(this).prop('checked')) {
             selectAllDayOption(row);
         }
     });
+    addAllDayBehaviour();
 });
 
 /**
@@ -45,11 +46,11 @@ function toggleRecurrenceRuleFields(selectElement) {
  * Apply all day behaviour to all event rows.
  */
 function addAllDayBehaviour() {
-    jQuery('[id*="_isAllDayEvent"]').on('ifChecked', function(event){
+    jQuery('[id*="_noTime"]').on('ifChecked', function(event){
         var row = jQuery(this).attr('id').split('_')[2];
         selectAllDayOption(row);
     });
-    jQuery('[id*="_isAllDayEvent"]').on('ifUnchecked', function(e, aux){
+    jQuery('[id*="_noTime"]').on('ifUnchecked', function(e, aux){
         var row = jQuery(this).attr('id').split('_')[2];
         deselectAllDayOption(row);
     });
@@ -61,25 +62,16 @@ function addAllDayBehaviour() {
  * @param row The event's table row.
  */
 function selectAllDayOption(row) {
-    var $format = 'DD.MM.YYYY';
+    var $time = '00:00';
 
-    var $inputStart = jQuery("input[id*='_events_" + row + "_dtStart']");
-    var $inputEnd = jQuery("input[id*='_events_" + row + "_dtEnd']");
+    var $inputStart = jQuery("input[id*='_events_" + row + "_timeFrom']");
+    var $inputEnd = jQuery("input[id*='_events_" + row + "_timeTo']");
 
     jQuery.each([$inputStart, $inputEnd], function(index, $input) {
         var $dp = $input.parent().data("DateTimePicker");
-        var $date = $dp.getDate();
 
-        $dp.destroy();
-        $input.data('dateFormat', $format);
-        $input.attr('data-date-format', $format);
-
-        $dp = $input.parent().datetimepicker({
-            format: $format,
-            pickTime: false
-        });
-        $dp = $input.parent().data("DateTimePicker");
-        $dp.setDate($date);
+        $input.val($time);
+        $dp.disable();
     });
 }
 
@@ -89,24 +81,12 @@ function selectAllDayOption(row) {
  * @param row The event's table row.
  */
 function deselectAllDayOption(row) {
-    var $format = 'DD.MM.YYYY, HH:mm';
-
-    var $inputStart = jQuery("input[id*='_events_" + row + "_dtStart']");
-    var $inputEnd = jQuery("input[id*='_events_" + row + "_dtEnd']");
+    var $inputStart = jQuery("input[id*='_events_" + row + "_timeFrom']");
+    var $inputEnd = jQuery("input[id*='_events_" + row + "_timeTo']");
 
     jQuery.each([$inputStart, $inputEnd], function(index, $input) {
         var $dp = $input.parent().data("DateTimePicker");
-        var $date = $dp.getDate();
 
-        $dp.destroy();
-        $input.data('dateFormat', $format);
-        $input.attr('data-date-format', $format);
-
-        $dp = $input.parent().datetimepicker({
-            format: $format,
-            pickTime: false
-        });
-        $dp = $input.parent().data("DateTimePicker");
-        $dp.setDate($date);
+        $dp.enable();
     });
 }
