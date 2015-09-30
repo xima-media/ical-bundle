@@ -2,6 +2,70 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
+            <trans-unit id="Date From">
+                <source>Date From</source>
+                <target>Date from</target>
+            </trans-unit>
+            <trans-unit id="Time From">
+                <source>Time From</source>
+                <target>Time from</target>
+            </trans-unit>
+            <trans-unit id="Date To">
+                <source>Date To</source>
+                <target>Date to</target>
+            </trans-unit>
+            <trans-unit id="Time To">
+                <source>Time To</source>
+                <target>Time to</target>
+            </trans-unit>
+            <trans-unit id="No Time">
+                <source>No Time</source>
+                <target>All day</target>
+            </trans-unit>
+            <trans-unit id="Recurrence Rule">
+                <source>Recurrence Rule</source>
+                <target>Recurrence rule</target>
+            </trans-unit>
+            <trans-unit id="Unique Id">
+                <source>Unique Id</source>
+                <target>Unique id</target>
+            </trans-unit>
+            <trans-unit id="Recurrence Id Timestamp">
+                <source>Recurrence Id Timestamp</source>
+                <target>Recurrence id timestamp</target>
+            </trans-unit>
+            <trans-unit id="Freq">
+                <source>Freq</source>
+                <target>Frequency</target>
+            </trans-unit>
+            <trans-unit id="Until">
+                <source>Until</source>
+                <target>Until</target>
+            </trans-unit>
+            <trans-unit id="Interval">
+                <source>Interval</source>
+                <target>Interval</target>
+            </trans-unit>
+            <trans-unit id="By Month">
+                <source>By Month</source>
+                <target>By month</target>
+            </trans-unit>
+            <trans-unit id="By Week No">
+                <source>By Week No</source>
+                <target>By week no</target>
+            </trans-unit>
+            <trans-unit id="By Year Day">
+                <source>By Year Day</source>
+                <target>By year day</target>
+            </trans-unit>
+            <trans-unit id="By Month Day">
+                <source>By Month Day</source>
+                <target>By month day</target>
+            </trans-unit>
+            <trans-unit id="By Day">
+                <source>By Day</source>
+                <target>By day</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
