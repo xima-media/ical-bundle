@@ -62,15 +62,14 @@ function addAllDayBehaviour() {
  * @param row The event's table row.
  */
 function selectAllDayOption(row) {
-    var $time = '00:00';
+    var $time = ['00:00','23:59'];
 
     var $inputStart = jQuery("input[id*='_events_" + row + "_timeFrom']");
     var $inputEnd = jQuery("input[id*='_events_" + row + "_timeTo']");
 
     jQuery.each([$inputStart, $inputEnd], function(index, $input) {
         var $dp = $input.parent().data("DateTimePicker");
-
-        $input.val($time);
+        $input.val($time[index]);
         $dp.disable();
     });
 }
