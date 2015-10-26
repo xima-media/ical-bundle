@@ -31,57 +31,23 @@ class DoctrineEventSubscriber implements \Doctrine\Common\EventSubscriber
             if (!($entity instanceof Event)) {
                 continue;
             }
-
+            /** @var $entity \Xima\ICalBundle\Entity\Component\Event */
             $eventUtil->cleanUpEvent($entity);
-            //merge dates and times, apply noTime setting
-            $entity->setDtStart($entity->getDateFrom());
-            if ($entity->getTimeFrom() != null)
-            {
-                $entity->getDtStart()->setTime($entity->getTimeFrom()->format('H'), $entity->getTimeFrom()->format('i'));
-            } else {
-                $entity->getDtStart()->setTime(0,0);
-                $entity->setTimeFrom(new \DateTime('1970-01-01'));
-            }
-
-            $entity->setDtEnd(clone($entity->getDateTo()));
-
-            if ($entity->getTimeTo() != null)
-            {
-                $entity->getDtEnd()->setTime($entity->getTimeTo()->format('H'), $entity->getTimeTo()->format('i'));
-            } else {
-                $entity->getDtEnd()->setTime(0,0);
-                $entity->setTimeTo(new \DateTime('1970-01-01'));
-            }
-
-            if ($entity->isNoTime()) {
-                $entity->getDtEnd()->add(new \DateInterval('P1D'));
-            }
-
             $uow->recomputeSingleEntityChangeSet($em->getClassMetadata(get_class($entity)), $entity);
+            // apply changed $dtStart values to child events $recurrenceIds if any
+            $changeSet = $uow->getEntityChangeSet($entity);
+            if (isset($changeSet['dtStart']) && isset($changeSet['dtStart'][0])) {
+                $interval = $changeSet['dtStart'][0]->diff($entity->getDtStart());
+                $q = $em->createQuery("select e from Xima\\ICalBundle\\Entity\\Component\\Event e where e.uniqueId = '" . $entity->getUniqueId() . "' AND e.recurrenceId IS NOT NULL");
+                $detachedEvents = $q->getResult();
 
-            // if event is a recurring, find all events that replace an instance
-            if ($entity->getRecurrenceRule()) {
-                /** @var $entity \Xima\ICalBundle\Entity\Component\Event */
-                $changeSet = $uow->getEntityChangeSet($entity);
-
-                if (isset($changeSet['dtStart']) && isset($changeSet['dtStart'][0])) {
-                    $interval = $changeSet['dtStart'][0]->diff($entity->getDtStart());
-                    foreach ($entity->getExDates() as $dateTime) {
-                        $dateTime->add($interval);
-                    }
-
-                    $q = $em->createQuery("select e from Xima\\ICalBundle\\Entity\\Component\\Event e where e.uniqueId = '" . $entity->getUniqueId() . "' AND e.recurrenceId IS NOT NULL");
-                    $events = $q->getResult();
-
-                    foreach ($events as $event) {
-                        /** @var $event \Xima\ICalBundle\Entity\Component\Event */
-                        $recurrenceId = $event->getRecurrenceId();
-                        $recurrenceId->getDatetime()->add($interval);
-                        // make Doctrine accept a DateTime as changed
-                        $recurrenceId->setDatetime(clone $recurrenceId->getDatetime());
-                        $em->persist($recurrenceId);
-                        $uow->recomputeSingleEntityChangeSet($em->getClassMetadata(get_class($recurrenceId)), $recurrenceId);
-                    }
+                foreach ($detachedEvents as $detachedEvent) {
+                    /** @var $detachedEvent \Xima\ICalBundle\Entity\Component\Event */
+                    $recurrenceId = $detachedEvent->getRecurrenceId();
+                    $recurrenceId->getDatetime()->add($interval);
+                    // make Doctrine accept a DateTime as changed
+                    $recurrenceId->setDatetime(clone $recurrenceId->getDatetime());
+                    $uow->recomputeSingleEntityChangeSet($em->getClassMetadata(get_class($recurrenceId)), $recurrenceId);
                 }
             }
         }
