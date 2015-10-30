@@ -35,6 +35,10 @@ class EventUtil
     {
         $instances = array();
 
+        if (!$event->getRecurrenceRule()) {
+            return array($event);
+        }
+
         $dateFrom = ($dateFrom)? $dateFrom : $event->getDtStart();
         if (!$dateFrom) {
             return $instances;
@@ -64,22 +68,22 @@ class EventUtil
         $editedEvents = $qb->getQuery()->getResult();
 
         foreach ($editedEvents as $editedEvent) {
-            /* @var $editedEvent \Xima\XRBSBundle\Entity\Event */
-            $vCalendar->addComponent($editedEvent);
+            /* @var $editedEvent \Xima\ICalBundle\Entity\Component\Event */
             $editedEventsByTimestamp[$editedEvent->getDtStart()->getTimestamp()] = $editedEvent;
+            $vCalendar->addComponent($editedEvent);
         }
 
         //render the calendar and parse it to get all recurrences of the event
         $vCalendarExpandedData = $vCalendar->render();
         $vCalendarExpanded = VObject\Reader::read($vCalendarExpandedData);
-
         /* @var $vCalendarExpanded \Sabre\VObject\Component\VCalendar */
         $vCalendarExpanded->expand($dateFrom, $dateTo);
         foreach ($vCalendarExpanded->getComponents() as $instanceComp) {
             /* @var $instanceComp \Sabre\VObject\Component\VEvent */
             $instance = null;
+            // if the instance was detached, it's not part of the series' instances
             if (isset($editedEventsByTimestamp[$instanceComp->DTSTART->getDateTime()->getTimestamp()])) {
-                    continue;
+                continue;
             } else {
                 $instance = clone $event;
             }
@@ -107,24 +111,28 @@ class EventUtil
      */
     public function cleanUpEvent(Event $event)
     {
-        //merge dates and times, apply noTime setting
-        $event->setDtStart($event->getDateFrom());
-        if (is_null($event->getTimeFrom())) {
-            $event->getDtStart()->setTime(0, 0);
-            $event->setTimeFrom(new \DateTime('1970-01-01'));
-        } else {
-            $event->getDtStart()->setTime($event->getTimeFrom()->format('H'), $event->getTimeFrom()->format('i'));
+        if ($event->getDateFrom()) {
+            //merge dates and times, apply noTime setting
+            $event->setDtStart($event->getDateFrom());
+            if (is_null($event->getTimeFrom())) {
+                $event->getDtStart()->setTime(0, 0);
+                $event->setTimeFrom(new \DateTime('1970-01-01'));
+            } else {
+                $event->getDtStart()->setTime($event->getTimeFrom()->format('H'), $event->getTimeFrom()->format('i'));
+            }
         }
-        $event->setDtEnd(clone($event->getDateTo()));
-        if (is_null($event->getTimeTo())) {
-            $event->getDtEnd()->setTime(0, 0);
-            $event->setTimeTo(new \DateTime('1970-01-01'));
-        } else {
-            $event->getDtEnd()->setTime($event->getTimeTo()->format('H'), $event->getTimeTo()->format('i'));
-        }
+        if ($event->getDateTo()) {
+            $event->setDtEnd(clone($event->getDateTo()));
+            if (is_null($event->getTimeTo())) {
+                $event->getDtEnd()->setTime(0, 0);
+                $event->setTimeTo(new \DateTime('1970-01-01'));
+            } else {
+                $event->getDtEnd()->setTime($event->getTimeTo()->format('H'), $event->getTimeTo()->format('i'));
+            }
 
-        if ($event->isNoTime()) {
-            $event->getDtEnd()->add(new \DateInterval('P1D'));
+            if ($event->isNoTime()) {
+                $event->getDtEnd()->add(new \DateInterval('P1D'));
+            }
         }
 
         //do the following only if event is recurring
