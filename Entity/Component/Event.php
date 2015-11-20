@@ -14,27 +14,29 @@ class Event extends \Eluceo\iCal\Component\Event
     /**
      * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @var \DateTime
      */
-    private $dateFrom;
+    protected $dateFrom;
 
     /**
      * @var \DateTime
      */
-    private $timeFrom;
+    protected $timeFrom;
 
     /**
      * @var \DateTime
      */
-    private $dateTo;
+    protected $dateTo;
 
     /**
      * @var \DateTime
      */
-    private $timeTo;
+    protected $timeTo;
+
+
 
     public function __construct()
     {

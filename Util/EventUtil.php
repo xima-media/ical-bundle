@@ -12,7 +12,7 @@ class EventUtil
     /**
      * @var EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     public function __construct(EntityManagerInterface $em)
     {
@@ -39,7 +39,7 @@ class EventUtil
             return array($event);
         }
 
-        $dateFrom = ($dateFrom)? $dateFrom : $event->getDtStart();
+        $dateFrom = ($dateFrom) ? $dateFrom : $event->getDtStart();
         if (!$dateFrom) {
             return $instances;
         }
@@ -60,7 +60,7 @@ class EventUtil
         //get edited events: depending on $includeEditedEvents to mark these events as deleted or to replace them by their edited event
         $editedEventsByTimestamp = array();
         $qb = $this->em->createQueryBuilder();
-        $qb ->select('e')
+        $qb->select('e')
             ->from('Xima\ICalBundle\Entity\Component\Event', 'e')
             ->where('e.uniqueId = :uniqueId')
             ->andWhere($qb->expr()->isNotNull('e.recurrenceId'))
