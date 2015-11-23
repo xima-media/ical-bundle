@@ -33,7 +33,7 @@ class EventUtil
      */
     public function getInstances(Event $event, \DateTime $dateFrom = null, \DateTime $dateTo = null)
     {
-        $instances = array();
+        $eventInstances = array();
 
         if (!$event->getRecurrenceRule()) {
             return array($event);
@@ -41,7 +41,7 @@ class EventUtil
 
         $dateFrom = ($dateFrom) ? $dateFrom : $event->getDtStart();
         if (!$dateFrom) {
-            return $instances;
+            return $eventInstances;
         }
         if (!$dateTo) {
             //default to one year if no end is set
@@ -80,23 +80,29 @@ class EventUtil
         $vCalendarExpanded->expand($dateFrom, $dateTo);
         foreach ($vCalendarExpanded->getComponents() as $instanceComp) {
             /* @var $instanceComp \Sabre\VObject\Component\VEvent */
-            $instance = null;
-            // if the instance was detached, it's not part of the series' instances
             if (isset($editedEventsByTimestamp[$instanceComp->DTSTART->getDateTime()->getTimestamp()])) {
+                // if the instance was detached, it's not part of the series' instances
                 continue;
             } else {
-                $instance = clone $event;
-            }
+                // It's basically the same event, but with the new calculated dates and times...
+                // @todo: refactor so that dtStart is set when dateFrom gets set and so on...
+                $dtStart = $instanceComp->DTSTART->getDateTime();
+                $dtEnd = $instanceComp->DTEND->getDateTime();
 
-            if ($instance) {
-                $instance->setDtStart($instanceComp->DTSTART->getDateTime());
-                $instance->setDtEnd($instanceComp->DTEND->getDateTime());
+                $eventInstance = clone $event;
+                /* @var $eventInstance Event */
+                $eventInstance->setDtStart($dtStart);
+                $eventInstance->setDateFrom($dtStart);
+                $eventInstance->setTimeFrom($dtStart);
+                $eventInstance->setDtEnd($dtEnd);
+                $eventInstance->setDateTo($dtEnd);
+                $eventInstance->setTimeTo($dtEnd);
 
-                $instances[] = $instance;
+                $eventInstances[] = $eventInstance;
             }
         }
 
-        return $instances;
+        return $eventInstances;
     }
 
     /**
