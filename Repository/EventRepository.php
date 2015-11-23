@@ -44,7 +44,7 @@ class EventRepository extends EntityRepository
             'andX',
         ), array(
             $qb->expr()->lte(':dateFrom', $qb->getRootAliases()[0].'.dtStart'),
-            $qb->expr()->lte($qb->getRootAliases()[0].'.dtStart', ':dateTo'),
+            $qb->expr()->lt($qb->getRootAliases()[0].'.dtStart', ':dateTo'),
         ));
 
         // case 2: event starts before selected dateFrom but ends after selected dateFrom
@@ -53,7 +53,7 @@ class EventRepository extends EntityRepository
             'andX',
         ), array(
             $qb->expr()->lt($qb->getRootAliases()[0].'.dtStart', ':dateFrom'),
-            $qb->expr()->lte(':dateFrom', $qb->getRootAliases()[0].'.dtEnd'),
+            $qb->expr()->lt(':dateFrom', $qb->getRootAliases()[0].'.dtEnd'),
         ));
 
         // or-combine the two cases for valid results
