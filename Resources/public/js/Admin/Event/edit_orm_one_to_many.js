@@ -11,6 +11,14 @@ jQuery(document).ready(function() {
 
     // mark changes as not coming from user, so confirm message on reload is not shown
     jQuery('.sonata-ba-form form').each(function () { jQuery(this).confirmExit(); });
+
+    $( document ).ajaxComplete(function() {
+        jQuery('[id*="_delete"]').on('ifChecked', function(event){
+            if ($(".sonata-ba-tbody tr").length > 1) {
+                jQuery(this).parent().parent().parent().remove();
+            }
+        });
+    });
 });
 
 /**
