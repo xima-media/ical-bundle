@@ -55,7 +55,9 @@ class EventUtil
 
         //create the calendar
         $vCalendar = new Calendar($event->getUniqueId());
-        $vCalendar->addComponent($event);
+        if (self::isValidDateTime($event->getDtStart()) && self::isValidDateTime($event->getDtEnd())) {
+            $vCalendar->addComponent($event);
+        }
 
         //get edited events: depending on $includeEditedEvents to mark these events as deleted or to replace them by their edited event
         $editedEventsByTimestamp = array();
@@ -69,8 +71,10 @@ class EventUtil
 
         foreach ($editedEvents as $editedEvent) {
             /* @var $editedEvent \Xima\ICalBundle\Entity\Component\Event */
-            $editedEventsByTimestamp[$editedEvent->getDtStart()->getTimestamp()] = $editedEvent;
-            $vCalendar->addComponent($editedEvent);
+            if (self::isValidDateTime($editedEvent->getDtStart()) && self::isValidDateTime($editedEvent->getDtEnd()) && self::isValidDateTime($editedEvent->getRecurrenceId()->getDatetime())) {
+                $editedEventsByTimestamp[$editedEvent->getDtStart()->getTimestamp()] = $editedEvent;
+                $vCalendar->addComponent($editedEvent);
+            }
         }
 
         //render the calendar and parse it to get all recurrences of the event
@@ -163,5 +167,22 @@ class EventUtil
                 }
             }
         }
+    }
+
+    /**
+     * Check if date value is '0000-00-00'
+     * @see http://stackoverflow.com/questions/10450644/how-do-you-explain-the-result-for-a-new-datetime0000-00-00-000000
+     * @todo: refactor?
+     *
+     * @param \DateTime $dateTime
+     * @return bool
+     */
+    public static function isValidDateTime(\DateTime $dateTime)
+    {
+        if ($dateTime->format('U') == -62169984000) {
+            return false;
+        }
+
+        return true;
     }
 }
