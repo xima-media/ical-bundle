@@ -37,7 +37,6 @@ class Event extends \Eluceo\iCal\Component\Event
     protected $timeTo;
 
 
-
     public function __construct()
     {
         parent::__construct(self::generateUniqueId());
@@ -51,7 +50,7 @@ class Event extends \Eluceo\iCal\Component\Event
     public static function generateUniqueId()
     {
         $request = Request::createFromGlobals();
-        $uniqueId = time().'-'.get_current_user().'@'.$request->server->get('SERVER_NAME');
+        $uniqueId = time() . '-' . get_current_user() . '@' . $request->server->get('SERVER_NAME');
 
         return $uniqueId;
     }
@@ -59,12 +58,14 @@ class Event extends \Eluceo\iCal\Component\Event
     public function postLoad()
     {
         //this->exDates: convert json to DateTimes
-        $exDatesJson = $this->exDates;
-        $this->exDates = array();
+        if (!is_null($this->exDates)) {
+            $exDatesJson = $this->exDates;
+            $this->exDates = array();
 
-        foreach ($exDatesJson as $exDateJson) {
-            $dateTime = new \DateTime($exDateJson['date'], new \DateTimeZone($exDateJson['timezone']));
-            $this->exDates[] = $dateTime;
+            foreach ($exDatesJson as $exDateJson) {
+                $dateTime = new \DateTime($exDateJson['date'], new \DateTimeZone($exDateJson['timezone']));
+                $this->exDates[] = $dateTime;
+            }
         }
     }
 

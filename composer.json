@@ -8,19 +8,13 @@
         }
         ],
     "require": {
-        "eluceo/ical": "dev-master",
+        "eluceo/ical": ">=0.9",
         "herrera-io/doctrine-dateinterval": "dev-master",
-        "sabre/vobject": "^3.4"
+        "sabre/vobject": ">=3.4"
     },
     "autoload": {
         "psr-4": {
             "Xima\\ICalBundle\\": ""
         }
-    },
-    "repositories": [
-        {
-             "type": "vcs",
-             "url": "https://github.com/xima-media/ical-bundle"
-        }
-    ]
+    }
 }
