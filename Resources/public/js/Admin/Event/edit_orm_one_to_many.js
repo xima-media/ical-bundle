@@ -73,7 +73,7 @@ function addAllDayBehaviour() {
  * @param row The event's table row.
  */
 function selectAllDayOption(row) {
-    var $time = ['00:00','23:59'];
+    var $time = ['12:00 am','11:59 pm'];
 
     var $inputStart = jQuery("input[id*='_events_" + row + "_timeFrom']");
     var $inputEnd = jQuery("input[id*='_events_" + row + "_timeTo']");
