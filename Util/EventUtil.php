@@ -81,7 +81,7 @@ class EventUtil
         $vCalendarExpandedData = $vCalendar->render();
         $vCalendarExpanded = VObject\Reader::read($vCalendarExpandedData);
         /* @var $vCalendarExpanded \Sabre\VObject\Component\VCalendar */
-        $vCalendarExpanded->expand($dateFrom, $dateTo);
+        $vCalendarExpanded = $vCalendarExpanded->expand($dateFrom, $dateTo);
         foreach ($vCalendarExpanded->getComponents() as $instanceComp) {
             /* @var $instanceComp \Sabre\VObject\Component\VEvent */
             if (isset($editedEventsByTimestamp[$instanceComp->DTSTART->getDateTime()->getTimestamp()])) {
