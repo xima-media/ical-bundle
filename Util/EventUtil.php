@@ -90,8 +90,10 @@ class EventUtil
             } else {
                 // It's basically the same event, but with the new calculated dates and times...
                 // @todo: refactor so that dtStart is set when dateFrom gets set and so on...
-                $dtStart = $instanceComp->DTSTART->getDateTime();
-                $dtEnd = $instanceComp->DTEND->getDateTime();
+                $dtStart = new \DateTime();
+                $dtStart->setTimestamp($instanceComp->DTSTART->getDateTime()->getTimestamp());
+                $dtEnd = new \DateTime();
+                $dtEnd->setTimestamp($instanceComp->DTEND->getDateTime()->getTimestamp());
 
                 $eventInstance = clone $event;
                 /* @var $eventInstance Event */
