@@ -20,28 +20,28 @@ Xima\ICalBundle\Entity\Property\Event\RecurrenceRule:
       nullable: true
       column: `count`
     byMonth:
-      length: 50
+      type: array
       nullable: true
     byWeekNo:
-      length: 50
+      type: array
       nullable: true
     byYearDay:
-      length: 50
+      type: array
       nullable: true
     byMonthDay:
-      length: 50
+      type: array
       nullable: true
     byDay:
-      length: 50
+      type: array
       nullable: true
     byHour:
-      length: 50
+      type: array
       nullable: true
     byMinute:
-      length: 50
+      type: array
       nullable: true
     bySecond:
-      length: 50
+      type: array
       nullable: true
     until:
       column: until

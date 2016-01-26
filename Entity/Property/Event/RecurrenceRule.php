@@ -21,16 +21,6 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
         return $this;
     }
 
-    /**
-     * Make the $month value an integer to make Sonata compatible to iCal package.
-     *
-     * @see \Eluceo\iCal\Property\Event\RecurrenceRule::setByMonth()
-     */
-    public function setByMonth($month)
-    {
-        parent::setByMonth(intval($month));
-    }
-
     public function __toString()
     {
         return get_class($this);
