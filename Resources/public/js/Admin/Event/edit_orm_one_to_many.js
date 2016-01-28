@@ -12,13 +12,17 @@ jQuery(document).ready(function() {
     // mark changes as not coming from user, so confirm message on reload is not shown
     jQuery('.sonata-ba-form form').each(function () { jQuery(this).confirmExit(); });
 
-    $( document ).ajaxComplete(function() {
+    jQuery( document ).ajaxComplete(function() {
         jQuery('[id*="_delete"]').on('ifChecked', function(event){
             if ($(".sonata-ba-tbody tr").length > 1) {
                 jQuery(this).parent().parent().parent().remove();
             }
         });
+
+        hideAdvancedRecurrenceRuleSettings();
     });
+
+    hideAdvancedRecurrenceRuleSettings();
 });
 
 /**
@@ -44,7 +48,7 @@ function addRecurrenceRuleBehaviour() {
  */
 function toggleRecurrenceRuleFields(selectElement) {
 
-    var followingSiblings = selectElement.parent().parent().nextAll();
+    var followingSiblings = selectElement.parent().parent().nextAll().children().andSelf();
 
     if (selectElement.val()) {
         followingSiblings.show();
@@ -98,5 +102,23 @@ function deselectAllDayOption(row) {
         var $dp = $input.parent().data("DateTimePicker");
 
         $dp.enable();
+    });
+}
+
+function hideAdvancedRecurrenceRuleSettings() {
+    jQuery("div[id*='_events'] .sonata-ba-tbody tr").each(function(key, value) {
+        if (!jQuery(this).find("#collapseRecurrenceRule_" + key).length > 0) {
+            if (jQuery("div[id*='" + key + "_recurrenceRule_interval']").css('display') == 'none') {
+                jQuery("div[id*='" + key + "_recurrenceRule_interval']").before('<div class="panel-group" style="display: none"> <div class="panel panel-default"> <div class="panel-heading"> <a data-toggle="collapse" href="#collapseRecurrenceRule_' + key + '">Advanced options</a> </div> <div id="collapseRecurrenceRule_' + key + '" class="panel-collapse collapse"></div> </div> </div>');
+            } else {
+                jQuery("div[id*='" + key + "_recurrenceRule_interval']").before('<div class="panel-group"> <div class="panel panel-default"> <div class="panel-heading"> <a data-toggle="collapse" href="#collapseRecurrenceRule_' + key + '">Advanced options</a> </div> <div id="collapseRecurrenceRule_' + key + '" class="panel-collapse collapse"></div> </div> </div>');
+            }
+            jQuery("div[id*='" + key + "_recurrenceRule_interval']").appendTo("#collapseRecurrenceRule_" + key);
+            jQuery("div[id*='" + key + "_recurrenceRule_byMonth']").appendTo("#collapseRecurrenceRule_" + key);
+            jQuery("div[id*='" + key + "_recurrenceRule_byWeekNo']").appendTo("#collapseRecurrenceRule_" + key);
+            jQuery("div[id*='" + key + "_recurrenceRule_byYearDay']").appendTo("#collapseRecurrenceRule_" + key);
+            jQuery("div[id*='" + key + "_recurrenceRule_byMonthDay']").appendTo("#collapseRecurrenceRule_" + key);
+            jQuery("div[id*='" + key + "_recurrenceRule_byDay']").appendTo("#collapseRecurrenceRule_" + key);
+        }
     });
 }
