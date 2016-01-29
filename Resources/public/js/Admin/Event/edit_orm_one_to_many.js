@@ -113,12 +113,12 @@ function hideAdvancedRecurrenceRuleSettings() {
             } else {
                 jQuery("div[id*='" + key + "_recurrenceRule_interval']").before('<div class="panel-group"> <div class="panel panel-default"> <div class="panel-heading"> <a data-toggle="collapse" href="#collapseRecurrenceRule_' + key + '">Advanced options</a> </div> <div id="collapseRecurrenceRule_' + key + '" class="panel-collapse collapse"></div> </div> </div>');
             }
-            jQuery("div[id*='" + key + "_recurrenceRule_interval']").appendTo("#collapseRecurrenceRule_" + key);
-            jQuery("div[id*='" + key + "_recurrenceRule_byMonth']").appendTo("#collapseRecurrenceRule_" + key);
-            jQuery("div[id*='" + key + "_recurrenceRule_byWeekNo']").appendTo("#collapseRecurrenceRule_" + key);
-            jQuery("div[id*='" + key + "_recurrenceRule_byYearDay']").appendTo("#collapseRecurrenceRule_" + key);
-            jQuery("div[id*='" + key + "_recurrenceRule_byMonthDay']").appendTo("#collapseRecurrenceRule_" + key);
-            jQuery("div[id*='" + key + "_recurrenceRule_byDay']").appendTo("#collapseRecurrenceRule_" + key);
+            jQuery("div[id*='" + key + "_recurrenceRule_interval']").appendTo("#collapseRecurrenceRule_" + key).children().andSelf().not('.select2-display-none').css('display', 'block');
+            jQuery("div[id*='" + key + "_recurrenceRule_byMonth']").appendTo("#collapseRecurrenceRule_" + key).children().andSelf().not('.select2-display-none').css('display', 'block');
+            jQuery("div[id*='" + key + "_recurrenceRule_byWeekNo']").appendTo("#collapseRecurrenceRule_" + key).children().andSelf().not('.select2-display-none').css('display', 'block');
+            jQuery("div[id*='" + key + "_recurrenceRule_byYearDay']").appendTo("#collapseRecurrenceRule_" + key).children().andSelf().not('.select2-display-none').css('display', 'block');
+            jQuery("div[id*='" + key + "_recurrenceRule_byMonthDay']").appendTo("#collapseRecurrenceRule_" + key).children().andSelf().not('.select2-display-none').css('display', 'block');
+            jQuery("div[id*='" + key + "_recurrenceRule_byDay']").appendTo("#collapseRecurrenceRule_" + key).children().andSelf().not('.select2-display-none').css('display', 'block');
         }
     });
 }
