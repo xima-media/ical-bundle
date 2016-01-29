@@ -75,8 +75,14 @@ Xima\ICalBundle\Entity\Component\Event:
       nullable: true
     created:
       type: datetime
+      gedmo:
+        timestampable:
+          on: create
     modified:
       type: datetime
+      gedmo:
+        timestampable:
+          on: update
     useUtc:
       column: use_utc
       type: boolean
