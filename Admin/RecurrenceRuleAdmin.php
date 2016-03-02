@@ -23,8 +23,14 @@ class RecurrenceRuleAdmin extends Admin
                     RecurrenceRule::FREQ_YEARLY => RecurrenceRule::FREQ_YEARLY,
                 ),))
             ->add('until', 'sonata_type_datetime_picker')
-            ->add('count', 'integer', array('required' => false))
-            ->add('interval', 'integer', array('required' => false))
+            ->add('count', 'integer', array(
+                'required' => false,
+                'attr' => array('min' => 0)
+            ))
+            ->add('interval', 'integer', array(
+                'required' => false,
+                'attr' => array('min' => 0)
+            ))
             ->add('byMonth', 'choice', array(
                     'multiple' => true,
                     'choices' => $this->getNumbersArray(12, 1)
