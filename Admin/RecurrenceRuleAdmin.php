@@ -38,12 +38,12 @@ class RecurrenceRuleAdmin extends Admin
             )
             ->add('byWeekNo', 'choice', array(
                     'multiple' => true,
-                    'choices' => $this->getNumbersArray(53, 1)
+                    'choices' => $this->getNumbersArray(52, 1)
                 )
             )
             ->add('byYearDay', 'choice', array(
                     'multiple' => true,
-                    'choices' => $this->getNumbersArray(366, 1)
+                    'choices' => $this->getNumbersArray(365, 1)
                 )
             )
             ->add('byMonthDay', 'choice', array(
