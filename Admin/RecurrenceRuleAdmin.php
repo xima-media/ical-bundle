@@ -87,7 +87,7 @@ class RecurrenceRuleAdmin extends Admin
     {
         $numbers = array();
         for ($i = $start; $i <= $number; $i++) {
-            $numbers[] = $i;
+            $numbers[$i] = $i;
         }
         return $numbers;
 
