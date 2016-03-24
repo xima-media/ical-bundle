@@ -39,6 +39,7 @@ class Event extends \Eluceo\iCal\Component\Event
 
     public function __construct()
     {
+        $this->created = new \DateTime();
         parent::__construct(self::generateUniqueId());
     }
 
