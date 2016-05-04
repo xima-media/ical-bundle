@@ -51,7 +51,7 @@ class Event extends \Eluceo\iCal\Component\Event
     public static function generateUniqueId()
     {
         $request = Request::createFromGlobals();
-        $uniqueId = time() . '-' . get_current_user() . '@' . $request->server->get('SERVER_NAME');
+        $uniqueId = time() . '-' . bin2hex(get_current_user()) . '-' .  mt_rand() . '@' . $request->server->get('SERVER_NAME');
 
         return $uniqueId;
     }
