@@ -35,7 +35,7 @@ class EventRepository extends EntityRepository
      *
      * @return Array
      */
-    private function getSingleInstances(QueryBuilder $qb, \DateTime $dateFrom, \DateTime $dateTo)
+    protected function getSingleInstances(QueryBuilder $qb, \DateTime $dateFrom, \DateTime $dateTo)
     {
         $singleDateConditions = array();
         // case 1: event starts between selected dates
@@ -69,7 +69,7 @@ class EventRepository extends EntityRepository
 
         $qb->setParameter('dateFrom', $dateFrom);
         $qb->setParameter('dateTo', $dateTo);
-
+        
         return $qb->getQuery()->getResult();
     }
 
@@ -77,7 +77,7 @@ class EventRepository extends EntityRepository
      *
      * @return Array
      */
-    private function getRecurringInstances(QueryBuilder $qb, \DateTime $dateFrom, \DateTime $dateTo)
+    protected function getRecurringInstances(QueryBuilder $qb, \DateTime $dateFrom, \DateTime $dateTo)
     {
         $events = array();
 

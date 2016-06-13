@@ -31,7 +31,7 @@ class EventUtil
      *
      * @throws \Exception
      */
-    public function getInstances(Event $event, \DateTime $dateFrom = null, \DateTime $dateTo = null)
+    public function getInstances(Event $event, \DateTime $dateFrom = null, \DateTime $dateTo = null, $findOnlyOne = false)
     {
         $eventInstances = array();
 
@@ -84,26 +84,30 @@ class EventUtil
         $vCalendarExpanded = $vCalendarExpanded->expand($dateFrom, $dateTo);
         foreach ($vCalendarExpanded->getComponents() as $instanceComp) {
             /* @var $instanceComp \Sabre\VObject\Component\VEvent */
+            // It's basically the same event, but with the new calculated dates and times...
+            // @todo: refactor so that dtStart is set when dateFrom gets set and so on...
+            $dtStart = new \DateTime();
+            $dtStart->setTimestamp($instanceComp->DTSTART->getDateTime()->getTimestamp());
+            $dtEnd = new \DateTime();
+            $dtEnd->setTimestamp($instanceComp->DTEND->getDateTime()->getTimestamp());
+
+            $eventInstance = clone $event;
+            /* @var $eventInstance Event */
+            $eventInstance->setDtStart($dtStart);
+            $eventInstance->setDateFrom($dtStart);
+            $eventInstance->setTimeFrom($dtStart);
+            $eventInstance->setDtEnd($dtEnd);
+            $eventInstance->setDateTo($dtEnd);
+            $eventInstance->setTimeTo($dtEnd);
+
+            if ($findOnlyOne){
+                return array($eventInstance);
+            }
+
             if (isset($editedEventsByTimestamp[$instanceComp->DTSTART->getDateTime()->getTimestamp()])) {
                 // if the instance was detached, it's not part of the series' instances
                 continue;
             } else {
-                // It's basically the same event, but with the new calculated dates and times...
-                // @todo: refactor so that dtStart is set when dateFrom gets set and so on...
-                $dtStart = new \DateTime();
-                $dtStart->setTimestamp($instanceComp->DTSTART->getDateTime()->getTimestamp());
-                $dtEnd = new \DateTime();
-                $dtEnd->setTimestamp($instanceComp->DTEND->getDateTime()->getTimestamp());
-
-                $eventInstance = clone $event;
-                /* @var $eventInstance Event */
-                $eventInstance->setDtStart($dtStart);
-                $eventInstance->setDateFrom($dtStart);
-                $eventInstance->setTimeFrom($dtStart);
-                $eventInstance->setDtEnd($dtEnd);
-                $eventInstance->setDateTo($dtEnd);
-                $eventInstance->setTimeTo($dtEnd);
-
                 $eventInstances[] = $eventInstance;
             }
         }
