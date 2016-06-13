@@ -103,7 +103,6 @@ class EventUtil
                 $eventInstance->setDtEnd($dtEnd);
                 $eventInstance->setDateTo($dtEnd);
                 $eventInstance->setTimeTo($dtEnd);
-                $eventInstance->removeRecurrenceRule();
 
                 $eventInstances[] = $eventInstance;
             }
