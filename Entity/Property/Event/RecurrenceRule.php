@@ -42,7 +42,7 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
     }
 
     /**
-     * @return NULL|string
+     * @return array
      */
     public function getByDay()
     {
@@ -58,7 +58,7 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
     }
 
     /**
-     * @return NULL|string
+     * @return array
      */
     public function getByWeekNo()
     {
@@ -66,7 +66,7 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
     }
 
     /**
-     * @return NULL|string
+     * @return array
      */
     public function getByYearDay()
     {
@@ -74,11 +74,35 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
     }
 
     /**
-     * @return NULL|string
+     * @return array
      */
     public function getByMonthDay()
     {
         return $this->byMonthDay;
+    }
+
+    /**
+     * @return array
+     */
+    public function getByHour()
+    {
+        return $this->byHour;
+    }
+
+    /**
+     * @return array
+     */
+    public function getByMinute()
+    {
+        return $this->byMinute;
+    }
+
+    /**
+     * @return array
+     */
+    public function getBySecond()
+    {
+        return $this->bySecond;
     }
 
     /**
