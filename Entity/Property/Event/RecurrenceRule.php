@@ -38,21 +38,9 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
         return get_class($this);
     }
 
-    /**
-     * Turns the collections to arrays.
-     */
     public function postLoad()
     {
-        $byDays = array();
-        foreach ($this->byDays as $bD)
-        {
-            /* @var $bD NthOccurrence */
-            $byDays[] = $bD->getNth() . $bD->getOccurrence();
-        }
-
-        if (!empty($byDays)){
-            parent::setByDay(implode(', ', $byDays));
-        }
+        $this->convertByDaysToByDay();
     }
 
     /**
@@ -135,6 +123,8 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
     public function addByDay(NthOccurrence $byDay)
     {
         $this->byDays[] = $byDay;
+
+        $this->convertByDaysToByDay();
     }
 
     /**
@@ -145,6 +135,8 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
     public function removeByDay(NthOccurrence $byDay)
     {
         $this->byDays->removeElement($byDay);
+
+        $this->convertByDaysToByDay();
     }
 
     /**
@@ -161,6 +153,25 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
     public function setByDays($byDays)
     {
         $this->byDays = $byDays;
+
+        $this->convertByDaysToByDay();
+    }
+
+    /**
+     * Turns the collections to arrays.
+     */
+    protected function convertByDaysToByDay()
+    {
+        $byDays = array();
+        foreach ($this->byDays as $bD)
+        {
+            /* @var $bD NthOccurrence */
+            $byDays[] = $bD->getNth() . $bD->getOccurrence();
+        }
+
+        if (!empty($byDays)){
+            parent::setByDay(implode(', ', $byDays));
+        }
     }
 
 }
