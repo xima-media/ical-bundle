@@ -16,6 +16,11 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
      */
     protected $byDays;
 
+    public function __construct()
+    {
+        $this->byDays = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * An empty freq value is only allowed for this bundle.
      *
@@ -109,14 +114,10 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
      * Add byDay.
      *
      * @param NthOccurrence $byDay
-     *
-     * @return RecurrenceRule
      */
     public function addByDay(NthOccurrence $byDay)
     {
         $this->byDays[] = $byDay;
-
-        return $this;
     }
 
     /**
@@ -124,7 +125,7 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
      *
      * @param NthOccurrence $byDay
      */
-    public function removeSpeaker(NthOccurrence $byDay)
+    public function removeByDay(NthOccurrence $byDay)
     {
         $this->byDays->removeElement($byDay);
     }
@@ -138,10 +139,11 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
     }
 
     /**
-     * @param \Doctrine\Common\Collections\Collection $byDays
+     * @param \Doctrine\Common\Collections\Collection
      */
     public function setByDays($byDays)
     {
         $this->byDays = $byDays;
     }
+
 }
