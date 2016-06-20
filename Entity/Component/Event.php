@@ -3,6 +3,7 @@
 namespace Xima\ICalBundle\Entity\Component;
 
 use Symfony\Component\HttpFoundation\Request;
+use Xima\ICalBundle\Entity\Property\Event\RecurrenceRule;
 
 /**
  * @author Wolfram Eberius <wolfram.eberius@xima.de>
@@ -36,6 +37,11 @@ class Event extends \Eluceo\iCal\Component\Event
      */
     protected $timeTo;
 
+    /**
+     * @var RecurrenceRule
+     */
+    protected $recurrenceRule;
+
 
     public function __construct()
     {
@@ -58,11 +64,11 @@ class Event extends \Eluceo\iCal\Component\Event
 
     public function postLoad()
     {
-        //this->exDates: convert json to DateTimes
-        if (!is_null($this->exDates)) {
-            $exDatesJson = $this->exDates;
-            $this->exDates = array();
+        $exDatesJson = $this->exDates;
+        $this->exDates = array();
 
+        //this->exDates: convert json to DateTimes, can be null or empty array
+        if (!empty($exDatesJson) && !is_null($exDatesJson)) {
             foreach ($exDatesJson as $exDateJson) {
                 $dateTime = new \DateTime($exDateJson['date'], new \DateTimeZone($exDateJson['timezone']));
                 $this->exDates[] = $dateTime;
@@ -163,5 +169,13 @@ class Event extends \Eluceo\iCal\Component\Event
     public function setTimeTo($timeTo)
     {
         $this->timeTo = $timeTo;
+    }
+
+    /**
+     * @return RecurrenceRule
+     */
+    public function getRecurrenceRule()
+    {
+        return $this->recurrenceRule;
     }
 }

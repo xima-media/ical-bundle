@@ -12,17 +12,17 @@ class NthOccurrenceAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('occurrence', 'choice', array(
-                    'choices' => array(
-                    RecurrenceRule::NTH_OCCURRENCE_EVERY => 'choice.nth_occurrence.' . RecurrenceRule::NTH_OCCURRENCE_EVERY,
-                    RecurrenceRule::NTH_OCCURRENCE_FIRST => 'choice.nth_occurrence.' . RecurrenceRule::NTH_OCCURRENCE_FIRST,
-                    RecurrenceRule::NTH_OCCURRENCE_SECOND => 'choice.nth_occurrence.' . RecurrenceRule::NTH_OCCURRENCE_SECOND,
-                    RecurrenceRule::NTH_OCCURRENCE_THIRD => 'choice.nth_occurrence.' . RecurrenceRule::NTH_OCCURRENCE_THIRD,
-                    RecurrenceRule::NTH_OCCURRENCE_FOURTH => 'choice.nth_occurrence.' . RecurrenceRule::NTH_OCCURRENCE_FOURTH,
-                    RecurrenceRule::NTH_OCCURRENCE_FIFTH => 'choice.nth_occurrence.' . RecurrenceRule::NTH_OCCURRENCE_FIFTH,
-                    RecurrenceRule::NTH_OCCURRENCE_LAST => 'choice.nth_occurrence.' . RecurrenceRule::NTH_OCCURRENCE_LAST), 'choice_translation_domain' => 'XimaICalBundle')
-            )
             ->add('nth', 'choice', array(
+                    'choices' => array(
+                        RecurrenceRule::NTH_OCCURRENCE_EVERY => 'choice.nth_occurrence.' . RecurrenceRule::NTH_OCCURRENCE_EVERY,
+                        RecurrenceRule::NTH_OCCURRENCE_FIRST => 'choice.nth_occurrence.' . RecurrenceRule::NTH_OCCURRENCE_FIRST,
+                        RecurrenceRule::NTH_OCCURRENCE_SECOND => 'choice.nth_occurrence.' . RecurrenceRule::NTH_OCCURRENCE_SECOND,
+                        RecurrenceRule::NTH_OCCURRENCE_THIRD => 'choice.nth_occurrence.' . RecurrenceRule::NTH_OCCURRENCE_THIRD,
+                        RecurrenceRule::NTH_OCCURRENCE_FOURTH => 'choice.nth_occurrence.' . RecurrenceRule::NTH_OCCURRENCE_FOURTH,
+                        RecurrenceRule::NTH_OCCURRENCE_FIFTH => 'choice.nth_occurrence.' . RecurrenceRule::NTH_OCCURRENCE_FIFTH,
+                        RecurrenceRule::NTH_OCCURRENCE_LAST => 'choice.nth_occurrence.' . RecurrenceRule::NTH_OCCURRENCE_LAST), 'choice_translation_domain' => 'XimaICalBundle')
+            )
+            ->add('occurrence', 'choice', array(
                     'choices' => array(
                         RecurrenceRule::WEEKDAY_MONDAY => RecurrenceRule::WEEKDAY_MONDAY,
                         RecurrenceRule::WEEKDAY_TUESDAY => RecurrenceRule::WEEKDAY_TUESDAY,

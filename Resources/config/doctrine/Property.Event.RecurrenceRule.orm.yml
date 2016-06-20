@@ -58,3 +58,5 @@ Xima\ICalBundle\Entity\Property\Event\RecurrenceRule:
           nth_occurrence_id:
             referencedColumnName: id
             unique: true
+  lifecycleCallbacks:
+    postLoad: [ postLoad ]

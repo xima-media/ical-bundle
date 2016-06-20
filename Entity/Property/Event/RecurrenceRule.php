@@ -39,6 +39,23 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
     }
 
     /**
+     * Turns the collections to arrays.
+     */
+    public function postLoad()
+    {
+        $byDays = array();
+        foreach ($this->byDays as $bD)
+        {
+            /* @var $bD NthOccurrence */
+            $byDays[] = $bD->getNth() . $bD->getOccurrence();
+        }
+
+        if (!empty($byDays)){
+            parent::setByDay(implode(', ', $byDays));
+        }
+    }
+
+    /**
      * @return int
      */
     public function getId()
@@ -139,7 +156,7 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
     }
 
     /**
-     * @param \Doctrine\Common\Collections\Collection
+     * @param \Doctrine\Common\Collections\Collection $byDays
      */
     public function setByDays($byDays)
     {

@@ -120,23 +120,23 @@
             </trans-unit>
             <trans-unit id="choice.nth_occurrence.1">
                 <source>choice.nth_occurrence.1</source>
-                <target>1.</target>
+                <target>every 1.</target>
             </trans-unit>
             <trans-unit id="choice.nth_occurrence.2">
                 <source>choice.nth_occurrence.2</source>
-                <target>2.</target>
+                <target>every 2.</target>
             </trans-unit>
             <trans-unit id="choice.nth_occurrence.3">
                 <source>choice.nth_occurrence.3</source>
-                <target>3.</target>
+                <target>every 3.</target>
             </trans-unit>
             <trans-unit id="choice.nth_occurrence.4">
                 <source>choice.nth_occurrence.4</source>
-                <target>4.</target>
+                <target>every 4.</target>
             </trans-unit>
             <trans-unit id="choice.nth_occurrence.5">
                 <source>choice.nth_occurrence.5</source>
-                <target>5.</target>
+                <target>every 5.</target>
             </trans-unit>
             <trans-unit id="choice.nth_occurrence.-1">
                 <source>choice.nth_occurrence.-1</source>
