@@ -31,9 +31,6 @@ Xima\ICalBundle\Entity\Property\Event\RecurrenceRule:
     byMonthDay:
       type: array
       nullable: true
-    byDay:
-      type: array
-      nullable: true
     byHour:
       type: array
       nullable: true
@@ -47,3 +44,17 @@ Xima\ICalBundle\Entity\Property\Event\RecurrenceRule:
       column: until
       type: datetime
       nullable: true
+  manyToMany:
+    byDays:
+      targetEntity: \Xima\ICalBundle\Entity\Property\RecurrenceRule\NthOccurrence
+      cascade: ["all"]
+      removeOprphans: true
+      joinTable:
+        name: recurrence_rule_by_day
+        joinColumns:
+          recurrence_rule_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          nth_occurrence_id:
+            referencedColumnName: id
+            unique: true

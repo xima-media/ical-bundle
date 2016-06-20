@@ -1,0 +1,14 @@
+Xima\ICalBundle\Entity\Property\RecurrenceRule\NthOccurrence:
+  type: entity
+  table: recurrence_nth_occurrence
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    nth:
+      type: string
+      nullable: true
+    occurrence:
+      type: string

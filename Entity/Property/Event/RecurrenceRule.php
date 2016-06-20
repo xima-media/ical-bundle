@@ -2,12 +2,19 @@
 
 namespace Xima\ICalBundle\Entity\Property\Event;
 
+use Xima\ICalBundle\Entity\Property\RecurrenceRule\NthOccurrence;
+
 class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
 {
     /**
      * @var int
      */
-    private $id;
+    protected $id;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    protected $byDays;
 
     /**
      * An empty freq value is only allowed for this bundle.
@@ -72,5 +79,45 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
     public function getByMonthDay()
     {
         return $this->byMonthDay;
+    }
+
+    /**
+     * Add byDay.
+     *
+     * @param NthOccurrence $byDay
+     *
+     * @return RecurrenceRule
+     */
+    public function addByDay(NthOccurrence $byDay)
+    {
+        $this->byDays[] = $byDay;
+
+        return $this;
+    }
+
+    /**
+     * Remove $byDay.
+     *
+     * @param NthOccurrence $byDay
+     */
+    public function removeSpeaker(NthOccurrence $byDay)
+    {
+        $this->byDays->removeElement($byDay);
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getByDays()
+    {
+        return $this->byDays;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $byDays
+     */
+    public function setByDays($byDays)
+    {
+        $this->byDays = $byDays;
     }
 }

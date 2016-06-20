@@ -118,7 +118,7 @@ function hideAdvancedRecurrenceRuleSettings() {
             jQuery("div[id*='" + key + "_recurrenceRule_byWeekNo']").appendTo("#collapseRecurrenceRule_" + key).children().andSelf().not('.select2-display-none').css('display', 'block');
             jQuery("div[id*='" + key + "_recurrenceRule_byYearDay']").appendTo("#collapseRecurrenceRule_" + key).children().andSelf().not('.select2-display-none').css('display', 'block');
             jQuery("div[id*='" + key + "_recurrenceRule_byMonthDay']").appendTo("#collapseRecurrenceRule_" + key).children().andSelf().not('.select2-display-none').css('display', 'block');
-            jQuery("div[id*='" + key + "_recurrenceRule_byDay']").appendTo("#collapseRecurrenceRule_" + key).children().andSelf().not('.select2-display-none').css('display', 'block');
+            jQuery("div[id*='" + key + "_recurrenceRule_byDay']").appendTo("#collapseRecurrenceRule_" + key).children().andSelf().not('.select2-display-none, script').css('display', 'block');
         }
     });
 }

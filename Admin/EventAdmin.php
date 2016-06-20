@@ -2,15 +2,11 @@
 
 namespace Xima\ICalBundle\Admin;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
-use Xima\ICalBundle\Entity\Component\Event;
 use Xima\ICalBundle\Event\FormEventSubscriber;
 
-class EventAdmin extends Admin
+class EventAdmin extends AbstractAdmin
 {
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)

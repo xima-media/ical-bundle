@@ -66,6 +66,82 @@
                 <source>By Day</source>
                 <target>By day</target>
             </trans-unit>
+            <trans-unit id="choose_recurrence">
+                <source>choose_recurrence</source>
+                <target>Choose a recurrence</target>
+            </trans-unit>
+            <trans-unit id="DAILY">
+                <source>DAILY</source>
+                <target>Daily</target>
+            </trans-unit>
+            <trans-unit id="WEEKLY">
+                <source>WEEKLY</source>
+                <target>Weekly</target>
+            </trans-unit>
+            <trans-unit id="MONTHLY">
+                <source>MONTHLY</source>
+                <target>Monthly</target>
+            </trans-unit>
+            <trans-unit id="YEARLY">
+                <source>YEARLY</source>
+                <target>Yearly</target>
+            </trans-unit>
+            <trans-unit id="MO">
+                <source>MO</source>
+                <target>Monday</target>
+            </trans-unit>
+            <trans-unit id="TU">
+                <source>TU</source>
+                <target>Tuesday</target>
+            </trans-unit>
+            <trans-unit id="WE">
+                <source>WE</source>
+                <target>Wednesday</target>
+            </trans-unit>
+            <trans-unit id="TH">
+                <source>TH</source>
+                <target>Thursday</target>
+            </trans-unit>
+            <trans-unit id="FR">
+                <source>FR</source>
+                <target>Friday</target>
+            </trans-unit>
+            <trans-unit id="SA">
+                <source>SA</source>
+                <target>Saturday</target>
+            </trans-unit>
+            <trans-unit id="SU">
+                <source>SU</source>
+                <target>Sunday</target>
+            </trans-unit>
+            <trans-unit id="choice.nth_occurrence.">
+                <source>choice.nth_occurrence.</source>
+                <target>every</target>
+            </trans-unit>
+            <trans-unit id="choice.nth_occurrence.1">
+                <source>choice.nth_occurrence.1</source>
+                <target>1.</target>
+            </trans-unit>
+            <trans-unit id="choice.nth_occurrence.2">
+                <source>choice.nth_occurrence.2</source>
+                <target>2.</target>
+            </trans-unit>
+            <trans-unit id="choice.nth_occurrence.3">
+                <source>choice.nth_occurrence.3</source>
+                <target>3.</target>
+            </trans-unit>
+            <trans-unit id="choice.nth_occurrence.4">
+                <source>choice.nth_occurrence.4</source>
+                <target>4.</target>
+            </trans-unit>
+            <trans-unit id="choice.nth_occurrence.5">
+                <source>choice.nth_occurrence.5</source>
+                <target>5.</target>
+            </trans-unit>
+            <trans-unit id="choice.nth_occurrence.-1">
+                <source>choice.nth_occurrence.-1</source>
+                <target>last</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -2,13 +2,11 @@
 
 namespace Xima\ICalBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Xima\ICalBundle\Entity\Property\Event\RecurrenceRule;
 
-class RecurrenceRuleAdmin extends Admin
+class RecurrenceRuleAdmin extends AbstractAdmin
 {
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
@@ -16,12 +14,12 @@ class RecurrenceRuleAdmin extends Admin
         $formMapper
             ->add('freq', 'choice', array(
                 'choices' => array(
-                    '' => 'Choose a recurrence',
+                    '' => 'choose_recurrence',
                     RecurrenceRule::FREQ_DAILY => RecurrenceRule::FREQ_DAILY,
                     RecurrenceRule::FREQ_MONTHLY => RecurrenceRule::FREQ_MONTHLY,
                     RecurrenceRule::FREQ_WEEKLY => RecurrenceRule::FREQ_WEEKLY,
                     RecurrenceRule::FREQ_YEARLY => RecurrenceRule::FREQ_YEARLY,
-                ),))
+                ), 'choice_translation_domain' => 'XimaICalBundle'))
             ->add('until', 'sonata_type_datetime_picker')
             ->add('count', 'integer', array(
                 'required' => false,
@@ -51,17 +49,16 @@ class RecurrenceRuleAdmin extends Admin
                     'choices' => $this->getNumbersArray(31, 1)
                 )
             )
-            ->add('byDay', 'choice', array(
-                    'multiple' => true,
-                    'choices' => array(
-                        RecurrenceRule::WEEKDAY_MONDAY => RecurrenceRule::WEEKDAY_MONDAY,
-                        RecurrenceRule::WEEKDAY_TUESDAY => RecurrenceRule::WEEKDAY_TUESDAY,
-                        RecurrenceRule::WEEKDAY_WEDNESDAY => RecurrenceRule::WEEKDAY_WEDNESDAY,
-                        RecurrenceRule::WEEKDAY_THURSDAY => RecurrenceRule::WEEKDAY_THURSDAY,
-                        RecurrenceRule::WEEKDAY_FRIDAY => RecurrenceRule::WEEKDAY_FRIDAY,
-                        RecurrenceRule::WEEKDAY_SATURDAY => RecurrenceRule::WEEKDAY_SATURDAY,
-                        RecurrenceRule::WEEKDAY_SUNDAY => RecurrenceRule::WEEKDAY_SUNDAY,),)
-            )
+            ->add('byDays',
+                'sonata_type_collection',
+                array(
+                    'required' => false,
+                ),
+                array(
+                    'edit' => 'inline',
+                    'admin_code' => 'xima_ical.sonata_admin.nth_occurrence',
+                ))
+
             ->add('byHour', 'choice', array(
                     'multiple' => true,
                     'choices' => $this->getNumbersArray(59),

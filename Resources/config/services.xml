@@ -22,6 +22,15 @@
                 <argument>XimaICalBundle</argument>
             </call>
         </service>
+        <service id="xima_ical.sonata_admin.nth_occurrence" class="Xima\ICalBundle\Admin\NthOccurrenceAdmin">
+            <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false"/>
+            <argument/>
+            <argument>Xima\ICalBundle\Entity\Property\RecurrenceRule\NthOccurrence</argument>
+            <argument/>
+            <call method="setTranslationDomain">
+                <argument>XimaICalBundle</argument>
+            </call>
+        </service>
         <service id="xima_ical.event_subscriber.doctrine" class="Xima\ICalBundle\Event\DoctrineEventSubscriber">
             <tag name="doctrine.event_subscriber" connection="default" />
         </service>
