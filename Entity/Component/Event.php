@@ -12,6 +12,7 @@ use Xima\ICalBundle\Entity\Property\Event\RecurrenceRule;
  */
 class Event extends \Eluceo\iCal\Component\Event
 {
+    const MAX_LENGTH_PER_LINE = 75;
     /**
      * @var int
      */
@@ -54,10 +55,25 @@ class Event extends \Eluceo\iCal\Component\Event
         return get_class($this);
     }
 
+    /**
+     * Generates an unique id according to http://www.kanzaki.com/docs/ical/uid.html with a max length of MAX_LENGTH_PER_LINE.
+     *
+     * @return string
+     */
     public static function generateUniqueId()
     {
         $request = Request::createFromGlobals();
-        $uniqueId = time() . '-' . bin2hex(get_current_user()) . '-' .  mt_rand() . '@' . $request->server->get('SERVER_NAME');
+        $leftHandString = time(). '-';
+        $rightHandString = '@' . $request->server->get('SERVER_NAME');
+        $fillValue = bin2hex(get_current_user()) . '-' .  mt_rand(1000000,9999999);
+
+        $fillLength = self::MAX_LENGTH_PER_LINE - strlen($leftHandString) - strlen($rightHandString);
+        if (strlen($fillValue) > $fillLength){
+            $fillValue = substr($fillValue, 0, $fillLength);
+        }
+
+        $uniqueIdCandidate = $leftHandString . $fillValue . $rightHandString;
+        $uniqueId = substr($leftHandString . $fillValue . $rightHandString, (strlen($uniqueIdCandidate) > self::MAX_LENGTH_PER_LINE) ? strlen($uniqueIdCandidate)-self::MAX_LENGTH_PER_LINE : 0);
 
         return $uniqueId;
     }
