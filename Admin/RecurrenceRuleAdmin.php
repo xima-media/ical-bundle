@@ -16,8 +16,8 @@ class RecurrenceRuleAdmin extends AbstractAdmin
                 'choices' => array(
                     '' => 'choose_recurrence',
                     RecurrenceRule::FREQ_DAILY => RecurrenceRule::FREQ_DAILY,
-                    RecurrenceRule::FREQ_MONTHLY => RecurrenceRule::FREQ_MONTHLY,
                     RecurrenceRule::FREQ_WEEKLY => RecurrenceRule::FREQ_WEEKLY,
+                    RecurrenceRule::FREQ_MONTHLY => RecurrenceRule::FREQ_MONTHLY,
                     RecurrenceRule::FREQ_YEARLY => RecurrenceRule::FREQ_YEARLY,
                 ), 'choice_translation_domain' => 'XimaICalBundle'))
             ->add('until', 'sonata_type_datetime_picker')
