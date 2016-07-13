@@ -46,7 +46,7 @@ class EventUtil
         if (!$dateTo) {
             //default to one year if no end is set
             $dateTo = clone ($event->getDtStart());
-            $dateTo->add(new \DateInterval('P1Y'));
+            $dateTo->add(new \DateInterval('P10Y'));
         }
 
         if (!$dateFrom || !$dateTo) {

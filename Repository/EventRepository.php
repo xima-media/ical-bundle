@@ -69,7 +69,7 @@ class EventRepository extends EntityRepository
 
         $qb->setParameter('dateFrom', $dateFrom);
         $qb->setParameter('dateTo', $dateTo);
-        
+
         return $qb->getQuery()->getResult();
     }
 
