@@ -16,6 +16,16 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
      */
     protected $byDays;
 
+    /**
+     * {@inheritdoc }
+     */
+    protected $freq = null;
+
+    /**
+     * {@inheritdoc }
+     */
+    protected $interval = null;
+
     public function __construct()
     {
         $this->byDays = new \Doctrine\Common\Collections\ArrayCollection();
