@@ -11,14 +11,10 @@ jQuery(document).ready(function() {
 
     // mark changes as not coming from user, so confirm message on reload is not shown
     jQuery('.sonata-ba-form form').each(function () { jQuery(this).confirmExit(); });
+    addEventDeleteListener();
 
     jQuery( document ).ajaxComplete(function() {
-        jQuery('[id*="_delete"]').on('ifChecked', function(event){
-            if ($(".sonata-ba-tbody tr").length > 1) {
-                jQuery(this).parent().parent().parent().remove();
-            }
-        });
-
+        addEventDeleteListener();
         hideAdvancedRecurrenceRuleSettings();
     });
 
@@ -119,6 +115,17 @@ function hideAdvancedRecurrenceRuleSettings() {
             jQuery("div[id*='" + key + "_recurrenceRule_byYearDay']").appendTo("#collapseRecurrenceRule_" + key).children().andSelf().not('.select2-display-none').css('display', 'block');
             jQuery("div[id*='" + key + "_recurrenceRule_byMonthDay']").appendTo("#collapseRecurrenceRule_" + key).children().andSelf().not('.select2-display-none').css('display', 'block');
             jQuery("div[id*='" + key + "_recurrenceRule_byDay']").appendTo("#collapseRecurrenceRule_" + key).children().andSelf().not('.select2-display-none, script').css('display', 'block');
+        }
+    });
+}
+
+/*
+ * Add event listener for deletion of events
+ */
+function addEventDeleteListener() {
+    jQuery('[id*="_delete"]').on('ifChecked', function(event){
+        if (jQuery('[id*="_events"][id*="sonata-ba-field-container"] tbody tr').length > 1) {
+            jQuery(this).parent().parent().parent().parent().parent().remove();
         }
     });
 }
