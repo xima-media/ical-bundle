@@ -120,12 +120,17 @@ function hideAdvancedRecurrenceRuleSettings() {
 }
 
 /*
- * Add event listener for deletion of events
+ * Add event listener for deletion of events and nthOccurrence
  */
 function addEventDeleteListener() {
-    jQuery('[id*="_delete"]').on('ifChecked', function(event){
+    jQuery('[id*="_delete"][id*="_events"]:not([id*="recurrenceRule"])').on('ifChecked', function(event){
         if (jQuery('[id*="_events"][id*="sonata-ba-field-container"] tbody tr').length > 1) {
             jQuery(this).parent().parent().parent().parent().parent().remove();
         }
+    });
+    jQuery('[id*="_delete"][id*="_events"][id*="recurrenceRule"]').on('ifChecked', function(event){
+        jQuery(this).parent().parent().parent().parent().parent().next().remove();
+        jQuery(this).parent().parent().parent().parent().parent().next().remove();
+        jQuery(this).parent().parent().parent().parent().parent().remove();
     });
 }
