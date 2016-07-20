@@ -16,6 +16,7 @@ jQuery(document).ready(function() {
     jQuery( document ).ajaxComplete(function() {
         addEventDeleteListener();
         hideAdvancedRecurrenceRuleSettings();
+        advancedOptionsHint();
     });
 
     hideAdvancedRecurrenceRuleSettings();
@@ -117,18 +118,49 @@ function hideAdvancedRecurrenceRuleSettings() {
             jQuery("div[id*='" + key + "_recurrenceRule_byDay']").appendTo("#collapseRecurrenceRule_" + key).children().andSelf().not('.select2-display-none, script').css('display', 'block');
         }
     });
+    advancedOptionsHint();
+}
+
+/*
+ * Add hint for hidden advanced options
+ */
+function advancedOptionsHint() {
+    console.log('hello');
+    jQuery("div[id*='events'] tbody.sonata-ba-tbody tr").each(function (row) {
+        var interval = jQuery("input[id*='" + row + "_recurrenceRule_interval']").val();
+        var byMonth = jQuery("div.select2-container[id*='" + row + "_recurrenceRule_byMonth'] .select2-search-choice").length;
+        var byWeekNo = jQuery("div.select2-container[id*='" + row + "_recurrenceRule_byWeekNo'] .select2-search-choice").length;
+        var byYearDay = jQuery("div.select2-container[id*='" + row + "_recurrenceRule_byYearDay'] .select2-search-choice").length;
+        var byMonthDay = jQuery("div.select2-container[id*='" + row + "_recurrenceRule_byMonthDay'] .select2-search-choice").length;
+        var byDays = jQuery("div[id*='" + row + "_recurrenceRule_'][id*=_delete]").length;
+        console.log(byDays);
+        var count = 0;
+        count += interval ? 1 : 0;
+        count += byMonth ? byMonth : 0;
+        count += byWeekNo ? byWeekNo : 0;
+        count += byYearDay ? byYearDay : 0;
+        count += byMonthDay ? byMonthDay : 0;
+        count += byDays ? byDays : 0;
+
+        var heading = jQuery("a[href='#collapseRecurrenceRule_" + row + "']");
+        if (count) {
+            heading.html(heading.html() + " (" + count + ")");
+        }
+    });
 }
 
 /*
  * Add event listener for deletion of events and nthOccurrence
  */
 function addEventDeleteListener() {
-    jQuery('[id*="_delete"][id*="_events"]:not([id*="recurrenceRule"])').on('ifChecked', function(event){
+    jQuery('[id*="_delete"][id*="_events"]:not([id*="recurrenceRule"])').on('ifChecked', function (event) {
         if (jQuery('[id*="_events"][id*="sonata-ba-field-container"] tbody tr').length > 1) {
             jQuery(this).parent().parent().parent().parent().parent().remove();
         }
     });
-    jQuery('[id*="_delete"][id*="_events"][id*="recurrenceRule"]').on('ifChecked', function(event){
+    jQuery('[id*="_delete"][id*="_events"][id*="recurrenceRule"]').on('ifChecked', function (event) {
+        jQuery(this).parent().parent().parent().parent().parent().next().remove();
+        jQuery(this).parent().parent().parent().parent().parent().next().remove();
         jQuery(this).parent().parent().parent().parent().parent().next().remove();
         jQuery(this).parent().parent().parent().parent().parent().next().remove();
         jQuery(this).parent().parent().parent().parent().parent().remove();
