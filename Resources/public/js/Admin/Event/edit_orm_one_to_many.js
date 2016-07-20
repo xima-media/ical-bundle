@@ -16,7 +16,6 @@ jQuery(document).ready(function() {
     jQuery( document ).ajaxComplete(function() {
         addEventDeleteListener();
         hideAdvancedRecurrenceRuleSettings();
-        advancedOptionsHint();
     });
 
     hideAdvancedRecurrenceRuleSettings();
