@@ -125,7 +125,6 @@ function hideAdvancedRecurrenceRuleSettings() {
  * Add hint for hidden advanced options
  */
 function advancedOptionsHint() {
-    console.log('hello');
     jQuery("div[id*='events'] tbody.sonata-ba-tbody tr").each(function (row) {
         var interval = jQuery("input[id*='" + row + "_recurrenceRule_interval']").val();
         var byMonth = jQuery("div.select2-container[id*='" + row + "_recurrenceRule_byMonth'] .select2-search-choice").length;
@@ -133,7 +132,6 @@ function advancedOptionsHint() {
         var byYearDay = jQuery("div.select2-container[id*='" + row + "_recurrenceRule_byYearDay'] .select2-search-choice").length;
         var byMonthDay = jQuery("div.select2-container[id*='" + row + "_recurrenceRule_byMonthDay'] .select2-search-choice").length;
         var byDays = jQuery("div[id*='" + row + "_recurrenceRule_'][id*=_delete]").length;
-        console.log(byDays);
         var count = 0;
         count += interval ? 1 : 0;
         count += byMonth ? byMonth : 0;
