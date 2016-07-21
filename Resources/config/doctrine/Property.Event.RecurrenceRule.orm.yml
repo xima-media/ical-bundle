@@ -48,7 +48,7 @@ Xima\ICalBundle\Entity\Property\Event\RecurrenceRule:
     byDays:
       targetEntity: \Xima\ICalBundle\Entity\Property\RecurrenceRule\NthOccurrence
       cascade: ["all"]
-      removeOprphans: true
+      removeOrphans: true
       joinTable:
         name: recurrence_rule_by_day
         joinColumns:

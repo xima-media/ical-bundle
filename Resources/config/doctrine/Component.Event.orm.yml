@@ -102,7 +102,6 @@ Xima\ICalBundle\Entity\Component\Event:
     recurrenceId:
       targetEntity: \Xima\ICalBundle\Entity\Property\Event\RecurrenceId
       cascade: ["all"]
-      orphanRemoval: true
       joinColumn:
         name: recurrence_id
         referencedColumnName: id
