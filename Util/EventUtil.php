@@ -35,6 +35,10 @@ class EventUtil
     {
         $eventInstances = array();
 
+        // this is necessary for using nthOccurrence, otherwise the maximum recurrence entities will result in an error
+        // todo: Refactor - solve recurrence count for nthOccurrence
+        VObject\Settings::$maxRecurrences = -1;
+
         if (!$event->getRecurrenceRule()) {
             return array($event);
         }
