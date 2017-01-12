@@ -77,7 +77,8 @@ class EventUtil
             /* @var $editedEvent \Xima\ICalBundle\Entity\Component\Event */
             if (self::isValidDateTime($editedEvent->getDtStart()) && self::isValidDateTime($editedEvent->getDtEnd()) && self::isValidDateTime($editedEvent->getRecurrenceId()->getDatetime())) {
                 $editedEventsByTimestamp[$editedEvent->getDtStart()->getTimestamp()] = $editedEvent;
-                $vCalendar->addComponent($editedEvent);
+                // don't add event to calender! lasts in strange validation conflicts ...
+                // $vCalendar->addComponent($editedEvent);
             }
         }
 
