@@ -1,17 +1,26 @@
 {
     "name" : "xima-media/ical-bundle",
-    "description" : "The Xima iCal Bundle",
+    "description" : "The XIMA iCal Bundle",
     "type" : "symfony-bundle",
-    "authors" : [{
+    "authors" : [
+        {
             "name" : "Wolfram Eberius",
             "email" : "wolfram.eberius@xima.de"
+        },
+        {
+            "name" : "Konrad Michalik",
+            "email" : "konrad.michalik@xima.de"
+        },
+        {
+            "name" : "Sebastian Gierth",
+            "email" : "sebastian.gierth@xima.de"
         }
-        ],
+    ],
     "require": {
-        "eluceo/ical": "dev-master",
-        "herrera-io/doctrine-dateinterval": "dev-master",
+        "eluceo/ical": "^0.13.0",
         "sabre/vobject": ">=3.4",
-        "stof/doctrine-extensions-bundle": "^1.2.2"
+        "stof/doctrine-extensions-bundle": "^1.2.2",
+        "timdev/doctrine-date-interval": "0.1.2"
     },
     "autoload": {
         "psr-4": {
