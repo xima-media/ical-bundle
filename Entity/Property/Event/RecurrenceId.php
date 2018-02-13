@@ -7,7 +7,7 @@ class RecurrenceId extends \Eluceo\iCal\Property\Event\RecurrenceId
     /**
      * @var int
      */
-    private $id;
+    protected $id;
 
     public function postLoad()
     {
