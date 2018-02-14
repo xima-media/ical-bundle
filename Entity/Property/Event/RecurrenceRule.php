@@ -130,7 +130,7 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
      *
      * @param NthOccurrence $byDay
      */
-    public function addByDay(NthOccurrence $byDay)
+    public function addByDays(NthOccurrence $byDay)
     {
         $this->byDays[] = $byDay;
 
@@ -142,7 +142,7 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
      *
      * @param NthOccurrence $byDay
      */
-    public function removeByDay(NthOccurrence $byDay)
+    public function removeByDays(NthOccurrence $byDay)
     {
         $this->byDays->removeElement($byDay);
 
