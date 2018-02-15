@@ -31,8 +31,5 @@
                 <argument>XimaICalBundle</argument>
             </call>
         </service>
-        <service id="xima_ical.event_subscriber.doctrine" class="Xima\ICalBundle\Event\DoctrineEventSubscriber">
-            <tag name="doctrine.event_subscriber" connection="default" />
-        </service>
     </services>
 </container>
