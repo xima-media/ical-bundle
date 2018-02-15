@@ -1,7 +1,7 @@
 iCal Bundle
 ===========
 
-Version 0.1.4
+Version 0.1.5
 
 Wraps the [eluceo/ical](https://github.com/markuspoerschke/iCal) package to a Symfony Bundle with Doctrine Association Mappings and includes Sonata Admin classes.
 
