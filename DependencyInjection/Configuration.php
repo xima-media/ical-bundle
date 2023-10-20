@@ -17,8 +17,7 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('xima_i_cal');
+        $treeBuilder = new TreeBuilder('xima_i_cal');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for

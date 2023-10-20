@@ -2,6 +2,7 @@
     "name" : "xima-media/ical-bundle",
     "description" : "The XIMA iCal Bundle",
     "type" : "symfony-bundle",
+    "version": "0.2.0",
     "authors" : [
         {
             "name" : "Wolfram Eberius",
@@ -14,12 +15,17 @@
         {
             "name" : "Sebastian Gierth",
             "email" : "sebastian.gierth@xima.de"
+        },
+        {
+            "name" : "Tobias Gaertner",
+            "email" : "tga@xima.de"
         }
     ],
     "require": {
+        "php": "^8.0",
         "eluceo/ical": "^0.13.0",
         "sabre/vobject": ">=3.4",
-        "stof/doctrine-extensions-bundle": "^1.2.2",
+        "stof/doctrine-extensions-bundle": "^1.5.0",
         "timdev/doctrine-date-interval": "0.1.2"
     },
     "autoload": {

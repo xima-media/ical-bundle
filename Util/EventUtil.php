@@ -23,27 +23,25 @@ class EventUtil
      * Returns an array with all instances of a recurring event. If an event was detached it's not part of the series' instances.
      *
      * todo: Refactor - combining eluceo/ical and sabre/vobject this way seems very expensive.
-     * @param Event $event
      * @param \DateTime|null $dateFrom
      * @param \DateTime|null $dateTo
      *
      * @return Event[]
-     *
      * @throws \Exception
      */
     public function getInstances(Event $event, \DateTime $dateFrom = null, \DateTime $dateTo = null, $findOnlyOne = false)
     {
-        $eventInstances = array();
+        $eventInstances = [];
 
         // this is necessary for using nthOccurrence, otherwise the maximum recurrence entities will result in an error
         // todo: Refactor - solve recurrence count for nthOccurrence
         VObject\Settings::$maxRecurrences = -1;
 
         if (!$event->getRecurrenceRule()) {
-            return array($event);
+            return [$event];
         }
 
-        $dateFrom = ($dateFrom) ? $dateFrom : $event->getDtStart();
+        $dateFrom = $dateFrom ?: $event->getDtStart();
         if (!$dateFrom) {
             return $eventInstances;
         }
@@ -64,10 +62,10 @@ class EventUtil
         }
 
         //get edited events: depending on $includeEditedEvents to mark these events as deleted or to replace them by their edited event
-        $editedEventsByTimestamp = array();
+        $editedEventsByTimestamp = [];
         $qb = $this->em->createQueryBuilder();
         $qb->select('e')
-            ->from('Xima\ICalBundle\Entity\Component\Event', 'e')
+            ->from(\Xima\ICalBundle\Entity\Component\Event::class, 'e')
             ->where('e.uniqueId = :uniqueId')
             ->andWhere($qb->expr()->isNotNull('e.recurrenceId'))
             ->setParameter('uniqueId', $event->getUniqueId());
@@ -106,7 +104,7 @@ class EventUtil
             $eventInstance->setTimeTo($dtEnd);
 
             if ($findOnlyOne){
-                return array($eventInstance);
+                return [$eventInstance];
             }
 
             if (isset($editedEventsByTimestamp[$instanceComp->DTSTART->getDateTime()->getTimestamp()])) {
@@ -127,8 +125,6 @@ class EventUtil
      * - set $recurrenceRule's $byDay value to null if empty
      * - apply changed $dtStart values to $excludedDates
      * Must be executed on persisting the event. Should be called prior to any validation.
-     *
-     * @param Event $event
      */
     public function cleanUpEvent(Event $event)
     {
@@ -185,12 +181,11 @@ class EventUtil
      * @see http://stackoverflow.com/questions/10450644/how-do-you-explain-the-result-for-a-new-datetime0000-00-00-000000
      * @todo: refactor?
      *
-     * @param \DateTime $dateTime
      * @return bool
      */
     public static function isValidDateTime(\DateTime $dateTime)
     {
-        if ($dateTime->format('U') == -62169984000) {
+        if ($dateTime->format('U') == -62_169_984_000) {
             return false;
         }
 

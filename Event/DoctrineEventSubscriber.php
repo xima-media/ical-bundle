@@ -9,22 +9,18 @@ class DoctrineEventSubscriber implements \Doctrine\Common\EventSubscriber
 {
     public function getSubscribedEvents()
     {
-        return array(
-            'onFlush',
-        );
+        return ['onFlush'];
     }
 
     /**
      * Update event's exclude dates and recurrenceIds when start datetime changes.
-     *
-     * @param OnFlushEventArgs $eventArgs
      */
     public function onFlush(OnFlushEventArgs $eventArgs)
     {
         $em = $eventArgs->getEntityManager();
         $uow = $em->getUnitOfWork();
 
-        $entities = array_merge($uow->getScheduledEntityUpdates(), $uow->getScheduledEntityInsertions());
+        $entities = [...$uow->getScheduledEntityUpdates(), ...$uow->getScheduledEntityInsertions()];
         $eventUtil = new EventUtil($em);
 
         foreach ($entities as $entity) {
@@ -33,7 +29,7 @@ class DoctrineEventSubscriber implements \Doctrine\Common\EventSubscriber
             }
             /** @var $entity \Xima\ICalBundle\Entity\Component\Event */
             $eventUtil->cleanUpEvent($entity);
-            $uow->recomputeSingleEntityChangeSet($em->getClassMetadata(get_class($entity)), $entity);
+            $uow->recomputeSingleEntityChangeSet($em->getClassMetadata($entity::class), $entity);
             // apply changed $dtStart values to child events $recurrenceIds if any
             $changeSet = $uow->getEntityChangeSet($entity);
             if (isset($changeSet['dtStart']) && isset($changeSet['dtStart'][0])) {
@@ -47,7 +43,7 @@ class DoctrineEventSubscriber implements \Doctrine\Common\EventSubscriber
                     $recurrenceId->getDatetime()->add($interval);
                     // make Doctrine accept a DateTime as changed
                     $recurrenceId->setDatetime(clone $recurrenceId->getDatetime());
-                    $uow->recomputeSingleEntityChangeSet($em->getClassMetadata(get_class($recurrenceId)), $recurrenceId);
+                    $uow->recomputeSingleEntityChangeSet($em->getClassMetadata($recurrenceId::class), $recurrenceId);
                 }
             }
         }

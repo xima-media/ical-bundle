@@ -10,9 +10,9 @@ use Xima\ICalBundle\Entity\Property\Event\RecurrenceRule;
  *
  * @todo Map missing properties: attendees and categories
  */
-class Event extends \Eluceo\iCal\Component\Event
+class Event extends \Eluceo\iCal\Component\Event implements \Stringable
 {
-    const MAX_LENGTH_PER_LINE = 75;
+    public const MAX_LENGTH_PER_LINE = 75;
     /**
      * @var int
      */
@@ -50,9 +50,9 @@ class Event extends \Eluceo\iCal\Component\Event
         parent::__construct(self::generateUniqueId());
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return get_class($this);
+        return static::class;
     }
 
     /**
@@ -65,7 +65,7 @@ class Event extends \Eluceo\iCal\Component\Event
         $request = Request::createFromGlobals();
         $leftHandString = time(). '-';
         $rightHandString = '@' . $request->server->get('SERVER_NAME');
-        $fillValue = bin2hex(get_current_user()) . '-' .  mt_rand(1000000,9999999);
+        $fillValue = bin2hex(get_current_user()) . '-' .  random_int(1_000_000,9_999_999);
 
         $fillLength = self::MAX_LENGTH_PER_LINE - strlen($leftHandString) - strlen($rightHandString);
         if (strlen($fillValue) > $fillLength){
@@ -81,7 +81,7 @@ class Event extends \Eluceo\iCal\Component\Event
     public function postLoad()
     {
         $exDatesJson = $this->exDates;
-        $this->exDates = array();
+        $this->exDates = [];
 
         //this->exDates: convert json to DateTimes, can be null or empty array
         if (!empty($exDatesJson) && !is_null($exDatesJson)) {
@@ -131,10 +131,7 @@ class Event extends \Eluceo\iCal\Component\Event
         return $this->dateFrom;
     }
 
-    /**
-     * @param mixed $dateFrom
-     */
-    public function setDateFrom($dateFrom)
+    public function setDateFrom(mixed $dateFrom)
     {
         $this->dateFrom = $dateFrom;
     }
@@ -147,10 +144,7 @@ class Event extends \Eluceo\iCal\Component\Event
         return $this->timeFrom;
     }
 
-    /**
-     * @param mixed $timeFrom
-     */
-    public function setTimeFrom($timeFrom)
+    public function setTimeFrom(mixed $timeFrom)
     {
         $this->timeFrom = $timeFrom;
     }
@@ -163,10 +157,7 @@ class Event extends \Eluceo\iCal\Component\Event
         return $this->dateTo;
     }
 
-    /**
-     * @param mixed $dateTo
-     */
-    public function setDateTo($dateTo)
+    public function setDateTo(mixed $dateTo)
     {
         $this->dateTo = $dateTo;
     }
@@ -179,10 +170,7 @@ class Event extends \Eluceo\iCal\Component\Event
         return $this->timeTo;
     }
 
-    /**
-     * @param mixed $timeTo
-     */
-    public function setTimeTo($timeTo)
+    public function setTimeTo(mixed $timeTo)
     {
         $this->timeTo = $timeTo;
     }

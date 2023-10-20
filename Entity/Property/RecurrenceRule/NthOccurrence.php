@@ -2,7 +2,7 @@
 
 namespace Xima\ICalBundle\Entity\Property\RecurrenceRule;
 
-class NthOccurrence
+class NthOccurrence implements \Stringable
 {
     /**
      * @var int
@@ -23,7 +23,7 @@ class NthOccurrence
      */
     protected $occurrence = '';
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->nth.$this->occurrence;
     }

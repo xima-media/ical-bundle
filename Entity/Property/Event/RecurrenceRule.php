@@ -4,7 +4,7 @@ namespace Xima\ICalBundle\Entity\Property\Event;
 
 use Xima\ICalBundle\Entity\Property\RecurrenceRule\NthOccurrence;
 
-class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
+class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule implements \Stringable
 {
     /**
      * @var int
@@ -43,9 +43,9 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
         return $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return get_class($this);
+        return static::class;
     }
 
     public function postLoad()
@@ -127,8 +127,6 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
 
     /**
      * Add byDay.
-     *
-     * @param NthOccurrence $byDay
      */
     public function addByDays(NthOccurrence $byDay)
     {
@@ -139,8 +137,6 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
 
     /**
      * Remove $byDay.
-     *
-     * @param NthOccurrence $byDay
      */
     public function removeByDays(NthOccurrence $byDay)
     {
@@ -172,7 +168,7 @@ class RecurrenceRule extends \Eluceo\iCal\Property\Event\RecurrenceRule
      */
     protected function convertByDaysToByDay()
     {
-        $byDays = array();
+        $byDays = [];
         foreach ($this->byDays as $bD)
         {
             /* @var $bD NthOccurrence */

@@ -1,25 +1,12 @@
 iCal Bundle
 ===========
 
-Version 0.1.5
-
 Wraps the [eluceo/ical](https://github.com/markuspoerschke/iCal) package to a Symfony Bundle with Doctrine Association Mappings and includes Sonata Admin classes.
 
 ### Installation
-Add the following to your `composer.json`:
-```json
-"xima-media/ical-bundle": "^0.1.0"`,
-"eluceo/ical": "@dev",
-"herrera-io/doctrine-dateinterval": "@dev"
-```
 
 ```json
-"repositories" : [
-    {
-      "type": "vcs",
-      "url": "https://github.com/xima-media/iCal"
-    }
-]
+composer require xima-media/ical-bundle
 ```
 
 **Notes:**

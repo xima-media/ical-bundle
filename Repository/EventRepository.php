@@ -14,8 +14,6 @@ class EventRepository extends EntityRepository
     protected $qb;
 
     /**
-     * @param \DateTime $dateFrom
-     * @param \DateTime $dateTo
      *
      * @return Array
      */
@@ -37,30 +35,15 @@ class EventRepository extends EntityRepository
      */
     protected function getSingleInstances(QueryBuilder $qb, \DateTime $dateFrom, \DateTime $dateTo)
     {
-        $singleDateConditions = array();
+        $singleDateConditions = [];
         // case 1: event starts between selected dates
-        $singleDateConditions[] = call_user_func_array(array(
-            $qb->expr(),
-            'andX',
-        ), array(
-            $qb->expr()->lte(':dateFrom', $qb->getRootAliases()[0].'.dtStart'),
-            $qb->expr()->lt($qb->getRootAliases()[0].'.dtStart', ':dateTo'),
-        ));
+        $singleDateConditions[] = call_user_func_array([$qb->expr(), 'andX'], [$qb->expr()->lte(':dateFrom', $qb->getRootAliases()[0].'.dtStart'), $qb->expr()->lt($qb->getRootAliases()[0].'.dtStart', ':dateTo')]);
 
         // case 2: event starts before selected dateFrom but ends after selected dateFrom
-        $singleDateConditions[] = call_user_func_array(array(
-            $qb->expr(),
-            'andX',
-        ), array(
-            $qb->expr()->lt($qb->getRootAliases()[0].'.dtStart', ':dateFrom'),
-            $qb->expr()->lt(':dateFrom', $qb->getRootAliases()[0].'.dtEnd'),
-        ));
+        $singleDateConditions[] = call_user_func_array([$qb->expr(), 'andX'], [$qb->expr()->lt($qb->getRootAliases()[0].'.dtStart', ':dateFrom'), $qb->expr()->lt(':dateFrom', $qb->getRootAliases()[0].'.dtEnd')]);
 
         // or-combine the two cases for valid results
-        $singleDateCondition = call_user_func_array(array(
-            $qb->expr(),
-            'orX',
-        ), $singleDateConditions);
+        $singleDateCondition = call_user_func_array([$qb->expr(), 'orX'], $singleDateConditions);
 
         $qb
             ->andWhere($qb->expr()->isNull($qb->getRootAliases()[0].'.recurrenceRule'))
@@ -79,7 +62,7 @@ class EventRepository extends EntityRepository
      */
     protected function getRecurringInstances(QueryBuilder $qb, \DateTime $dateFrom, \DateTime $dateTo)
     {
-        $events = array();
+        $events = [];
 
         $qb->andWhere($qb->expr()->isNotNull($qb->getRootAliases()[0].'.recurrenceRule'));
 
