@@ -4,6 +4,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="Xima\ICalBundle\Event\DoctrineEventSubscriber" public="true">
+            <tag name="doctrine.event_subscriber" connection="default"/>
+        </service>
         <service id="xima_ical.sonata_admin.event" class="Xima\ICalBundle\Admin\EventAdmin">
             <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false"/>
             <argument/>
