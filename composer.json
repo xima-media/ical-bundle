@@ -2,7 +2,7 @@
     "name" : "xima-media/ical-bundle",
     "description" : "The XIMA iCal Bundle",
     "type" : "symfony-bundle",
-    "version": "0.2.0",
+    "version": "0.2.2",
     "authors" : [
         {
             "name" : "Wolfram Eberius",

@@ -34,7 +34,8 @@ class DoctrineEventSubscriber implements \Doctrine\Common\EventSubscriber
             $changeSet = $uow->getEntityChangeSet($entity);
             if (isset($changeSet['dtStart']) && isset($changeSet['dtStart'][0])) {
                 $interval = $changeSet['dtStart'][0]->diff($entity->getDtStart());
-                $q = $em->createQuery("select e from Xima\\ICalBundle\\Entity\\Component\\Event e where e.uniqueId = '" . $entity->getUniqueId() . "' AND e.recurrenceId IS NOT NULL");
+                $fqcn = $em->getMetadataFactory()->getMetadataFor(get_class($entity))->getName();
+                $q = $em->createQuery("select e from " . $fqcn . " e where e.uniqueId = '" . $entity->getUniqueId() . "' AND e.recurrenceId IS NOT NULL");
                 $detachedEvents = $q->getResult();
 
                 foreach ($detachedEvents as $detachedEvent) {
