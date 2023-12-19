@@ -66,7 +66,7 @@ class Event extends \Eluceo\iCal\Component\Event implements \Stringable
         $request = Request::createFromGlobals();
         $leftHandString = time(). '-';
         $rightHandString = '@' . $request->server->get('SERVER_NAME');
-        $fillValue = bin2hex(get_current_user()) . '-' .  random_int(1_000_000,9_999_999);
+        $fillValue = random_int(1_000_000,9_999_999) . '-' .  random_int(1_000_000,9_999_999);
 
         $fillLength = self::MAX_LENGTH_PER_LINE - strlen($leftHandString) - strlen($rightHandString);
         if (strlen($fillValue) > $fillLength){
