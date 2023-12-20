@@ -4,7 +4,6 @@ namespace Xima\ICalBundle\Entity\Component;
 
 use Symfony\Component\HttpFoundation\Request;
 use Xima\ICalBundle\Entity\Property\Event\RecurrenceRule;
-use function get_current_user;
 
 /**
  * @author Wolfram Eberius <wolfram.eberius@xima.de>
